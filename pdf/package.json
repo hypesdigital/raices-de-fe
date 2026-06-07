@@ -1,0 +1,12 @@
+{
+  "name": "raices-de-fe-pdf",
+  "version": "1.0.0",
+  "description": "Gerador de PDF para Raíces de Fe via Puppeteer",
+  "scripts": {
+    "generate": "node generate-pdf.js",
+    "install-chromium": "node -e \"const p=require('puppeteer'); p.executablePath();\""
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  }
+}

@@ -1,0 +1,7 @@
+# Bundle de design (arquivos temporários do processo)
+design-bundle/
+
+# Editor
+.DS_Store
+Thumbs.db
+*.swp

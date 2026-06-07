@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Raíces de Fe — Semanas 1 a 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:       #1B3A6B;
+  --navy-dk:    #0D2B5E;
+  --gold:       #C9A84C;
+  --gold-lt:    #e8c060;
+  --white:      #ffffff;
+  --cream:      #FAFAF8;
+  --text:       #1A1A2E;
+  --text-sub:   #6B7280;
+  --text-body:  #374151;
+
+  --card-blue:    #EEF4FF;
+  --card-purple:  #F3EEFF;
+  --card-green:   #EEFAF3;
+  --card-salmon:  #FEF3F0;
+
+  --border-blue:    #93C5FD;
+  --border-purple:  #C4B5FD;
+  --border-green:   #6EE7B7;
+  --border-salmon:  #FCA5A5;
+
+  --divider: #E5E7EB;
+}
+
+html, body { background: #e0e0e0; }
+
+/* ═══════════════════════════════════════════
+   PAGE — A4 CONTAINER
+   ═══════════════════════════════════════════ */
+.page {
+  width:  210mm;
+  height: 297mm;
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+  position: relative;
+  background: var(--cream);
+  /* Screen preview only — remove for print */
+  margin: 0 auto 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.18);
+}
+
+/* ═══════════════════════════════════════════
+   LAYOUT: SPLIT 50/50
+   ═══════════════════════════════════════════ */
+.split {
+  display: flex;
+  width:  100%;
+  height: 100%;
+}
+
+.col-left {
+  width:   50%;
+  height:  100%;
+  padding: 44px 26px 36px 36px;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.col-right {
+  width:  50%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   LAYOUT: FULL WIDTH (Contenido Principal)
+   ═══════════════════════════════════════════ */
+.page-full {
+  background: var(--white);
+}
+
+.full-inner {
+  width:      100%;
+  height:     100%;
+  padding:    40px 56px 36px;
+  display:    flex;
+  flex-direction: column;
+  overflow:   hidden;
+}
+
+/* ═══════════════════════════════════════════
+   COMPONENTS
+   ═══════════════════════════════════════════ */
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--navy);
+  border-radius: 20px;
+  padding: 3px 13px;
+  font-family: 'Inter', sans-serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  color: var(--navy);
+  text-transform: uppercase;
+  width: fit-content;
+  margin-bottom: 18px;
+}
+
+/* Page title (split pages) */
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--navy-dk);
+  line-height: 1.12;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.page-title.gold-accent { color: var(--navy-dk); }
+.page-title .accent     { color: var(--gold); }
+
+/* Subtitle */
+.page-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--text-sub);
+  line-height: 1.55;
+  margin-bottom: 28px;
+}
+
+/* Section header */
+.sec-hdr {
+  display:     flex;
+  align-items: center;
+  gap:         7px;
+  font-family: 'Inter', sans-serif;
+  font-size:   10.5px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  color:       var(--navy);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.sec-hdr .ico { font-size: 15px; }
+
+/* Body text */
+.body {
+  font-family: 'Inter', sans-serif;
+  font-size:   13px;
+  color:       var(--text-body);
+  line-height: 1.68;
+  margin-bottom: 18px;
+}
+
+.body-sm {
+  font-family: 'Inter', sans-serif;
+  font-size:   12.5px;
+  color:       var(--text-body);
+  line-height: 1.65;
+}
+
+/* Discovery cards (Descubrir) */
+.d-cards { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
+
+.d-card {
+  border-radius:  8px;
+  padding:        10px 14px;
+  font-family:    'Inter', sans-serif;
+  font-size:      13px;
+  font-weight:    500;
+  color:          var(--text);
+  display:        flex;
+  align-items:    center;
+  gap:            10px;
+}
+
+.d-card.blue   { background: var(--card-blue);   border-left: 3px solid var(--border-blue); }
+.d-card.purple { background: var(--card-purple);  border-left: 3px solid var(--border-purple); }
+.d-card.green  { background: var(--card-green);   border-left: 3px solid var(--border-green); }
+
+.d-card .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  flex-shrink: 0;
+}
+.d-card.blue   .dot { background: var(--border-blue); }
+.d-card.purple .dot { background: var(--border-purple); }
+.d-card.green  .dot { background: var(--border-green); }
+
+/* Question cards (Conversar) */
+.q-cards { display: flex; flex-direction: column; gap: 9px; }
+
+.q-card {
+  border-radius: 10px;
+  padding:       13px 15px;
+  border:        1.5px solid;
+  background:    var(--white);
+}
+
+.q-card.blue   { border-color: var(--border-blue); }
+.q-card.purple { border-color: var(--border-purple); }
+.q-card.green  { border-color: var(--border-green); }
+
+.q-card-title {
+  font-family: 'Inter', sans-serif;
+  font-size:   12px;
+  font-weight: 700;
+  color:       var(--navy-dk);
+  margin-bottom: 3px;
+}
+
+.q-card-text {
+  font-family: 'Inter', sans-serif;
+  font-size:   12px;
+  color:       var(--text-body);
+  line-height: 1.5;
+}
+
+/* Parent tip card */
+.tip-card {
+  display:    flex;
+  gap:        10px;
+  background: var(--card-salmon);
+  border-left: 3px solid var(--border-salmon);
+  border-radius: 8px;
+  padding:    12px 14px;
+  margin-top: auto;
+}
+
+.tip-ico { font-size: 15px; flex-shrink: 0; line-height: 1.5; }
+
+.tip-title {
+  font-family: 'Inter', sans-serif;
+  font-size:   11.5px;
+  font-weight: 700;
+  color:       #B91C1C;
+  margin-bottom: 4px;
+}
+
+.tip-text {
+  font-family: 'Inter', sans-serif;
+  font-size:   11.5px;
+  color:       var(--text-body);
+  line-height: 1.55;
+}
+
+/* Activity card */
+.act-card {
+  background:    var(--card-blue);
+  border-radius: 10px;
+  padding:       16px 18px;
+  margin-top:    12px;
+}
+
+.act-title {
+  font-family:    'Inter', sans-serif;
+  font-size:      10px;
+  font-weight:    700;
+  letter-spacing: 1px;
+  color:          var(--navy);
+  text-transform: uppercase;
+  margin-bottom:  8px;
+}
+
+.act-text {
+  font-family: 'Inter', sans-serif;
+  font-size:   12.5px;
+  color:       var(--text-body);
+  line-height: 1.6;
+}
+
+/* Divider */
+.hr {
+  height:    1px;
+  background: var(--divider);
+  margin:    16px 0;
+  flex-shrink: 0;
+}
+
+/* Verse card */
+.verse {
+  background:    var(--navy-dk);
+  border-radius: 10px;
+  padding:       16px 22px;
+  margin-top:    auto;
+  flex-shrink:   0;
+}
+
+.verse-text {
+  font-family:  'Playfair Display', serif;
+  font-size:    13.5px;
+  font-style:   italic;
+  color:        rgba(255,255,255,.92);
+  line-height:  1.65;
+  margin-bottom: 7px;
+}
+
+.verse-ref {
+  font-family:    'Inter', sans-serif;
+  font-size:      10.5px;
+  font-weight:    600;
+  color:          var(--gold);
+  letter-spacing: 0.4px;
+}
+
+/* ═══ FULL PAGE: section titles ═══ */
+.full-badge {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            10px;
+  margin-bottom:  6px;
+}
+
+.full-week-title {
+  font-family:  'Playfair Display', serif;
+  font-size:    17px;
+  font-weight:  700;
+  color:        var(--navy);
+  margin-bottom: 20px;
+}
+
+.full-sec-title {
+  font-family:  'Playfair Display', serif;
+  font-size:    19px;
+  font-weight:  700;
+  color:        var(--navy-dk);
+  margin-bottom: 8px;
+}
+
+.full-body {
+  font-family: 'Inter', sans-serif;
+  font-size:   13px;
+  color:       var(--text-body);
+  line-height: 1.68;
+}
+
+.full-body + .full-body { margin-top: 8px; }
+
+.bullet-list {
+  list-style: none;
+  margin-top: 6px;
+}
+
+.bullet-list li {
+  font-family: 'Inter', sans-serif;
+  font-size:   13px;
+  color:       var(--text-body);
+  line-height: 1.6;
+  padding-left: 16px;
+  position: relative;
+  margin-bottom: 2px;
+}
+
+.bullet-list li::before {
+  content:  '·';
+  position: absolute;
+  left:     2px;
+  color:    var(--navy);
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════
+   ILLUSTRATION PLACEHOLDERS
+   ═══════════════════════════════════════════ */
+.illus {
+  width:    100%;
+  height:   100%;
+  position: relative;
+  display:  flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding:  16px;
+}
+
+.illus-label {
+  background:    rgba(0,0,0,.42);
+  border:        1px dashed rgba(255,255,255,.25);
+  border-radius: 6px;
+  padding:       7px 11px;
+  font-family:   'Inter', sans-serif;
+  font-size:     9px;
+  font-style:    italic;
+  color:         rgba(255,255,255,.65);
+  max-width:     180px;
+  line-height:   1.5;
+}
+
+/* Illustration gradient themes */
+.illus-night-stars {
+  background: linear-gradient(165deg,
+    #020810 0%, #060f22 20%, #0a1a3a 40%,
+    #0e2545 55%, #122e50 70%,
+    #0f2a1e 85%, #0a1e14 100%);
+}
+
+.illus-sunset-walk {
+  background: linear-gradient(165deg,
+    #0d2040 0%, #1a3a6b 25%, #2d5e8a 45%,
+    #c07a2a 65%, #d09030 80%, #6a3010 100%);
+}
+
+.illus-indoor-night {
+  background: linear-gradient(165deg,
+    #080c18 0%, #111828 30%, #1e2840 55%,
+    #7a5818 75%, #5a4012 88%, #3a2808 100%);
+}
+
+.illus-nature-gold {
+  background: linear-gradient(165deg,
+    #1a3a1e 0%, #2a5a28 25%, #4a8a3a 45%,
+    #d0a820 65%, #e8c030 80%, #b88010 100%);
+}
+
+.illus-garden-night {
+  background: linear-gradient(165deg,
+    #04080e 0%, #080f1e 25%, #0d1e30 50%,
+    #121e10 70%, #1a3018 85%, #0e2010 100%);
+}
+
+.illus-deep-space {
+  background: linear-gradient(165deg,
+    #010308 0%, #03060e 25%, #050b18 50%,
+    #070e22 70%, #0a1430 85%, #0d1a3e 100%);
+}
+
+.illus-indoor-warm {
+  background: linear-gradient(165deg,
+    #100c08 0%, #1e1610 25%, #2a2015 50%,
+    #6a4a10 70%, #8a6018 85%, #5a4010 100%);
+}
+
+.illus-kitchen-warm {
+  background: linear-gradient(165deg,
+    #3a2808 0%, #6a4810 25%, #9a6818 50%,
+    #c88820 70%, #e0a030 85%, #c88020 100%);
+}
+
+.illus-mechanical {
+  background: linear-gradient(165deg,
+    #080c10 0%, #101418 25%, #181c22 50%,
+    #302808 70%, #4a3808 85%, #3a2c04 100%);
+}
+
+.illus-science-blue {
+  background: linear-gradient(165deg,
+    #030810 0%, #060e20 25%, #0a1a38 50%,
+    #0d2450 70%, #103060 85%, #0d2858 100%);
+}
+
+.illus-warm-home {
+  background: linear-gradient(165deg,
+    #4a3008 0%, #7a5010 25%, #a87018 50%,
+    #d09020 70%, #e8a828 85%, #c88020 100%);
+}
+
+/* ═══════════════════════════════════════════
+   SPACER
+   ═══════════════════════════════════════════ */
+.spacer-sm { flex-shrink: 0; height: 14px; }
+.spacer-md { flex-shrink: 0; height: 24px; }
+
+/* ═══════════════════════════════════════════
+   PRINT
+   ═══════════════════════════════════════════ */
+@media print {
+  html, body { background: white; }
+  .page      { margin: 0; box-shadow: none; }
+}
+
+@page { size: A4; margin: 0; }
+</style>
+</head>
+<body>
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  SEMANA 1 — EL COMIENZO DE TODO                         ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+
+<!-- ── S1 · P1 · DESCUBRIR ─────────────────────────────────── -->
+<div class="page split">
+  <div class="col-left">
+
+    <span class="badge">Semana 1</span>
+
+    <h1 class="page-title">El Comienzo<br>de Todo</h1>
+    <p class="page-sub">¿Por qué creer en algo<br>que no podemos ver?</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="sec-hdr"><span class="ico">🔍</span> Descubrir</div>
+    <p class="body">
+      Esta semana vamos a explorar juntos
+      las preguntas más importantes —
+      y descubrir que tener preguntas es
+      el primer paso de una fe verdadera.
+    </p>
+
+    <div class="d-cards">
+      <div class="d-card blue">
+        <span class="dot"></span>¿Qué es la fe?
+      </div>
+      <div class="d-card purple">
+        <span class="dot"></span>¿Por qué creer?
+      </div>
+      <div class="d-card green">
+        <span class="dot"></span>¿Hay pruebas de Dios?
+      </div>
+    </div>
+
+  </div>
+  <div class="col-right">
+    <!-- ILUSTRACIÓN: niño de ~10 años acostado en pasto verde,
+         manos detrás de la cabeza, mirando cielo estrellado enorme.
+         Estilo ilustración cinematográfica, azul profundo y dorado.
+         Atmósfera de asombro y calma. -->
+    <div class="illus illus-night-stars">
+      <div class="illus-label">Ilustración: niño mirando el cielo estrellado · atmósfera de asombro</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── S1 · P2 · CONTENIDO PRINCIPAL ──────────────────────── -->
+<div class="page page-full">
+  <div class="full-inner">
+
+    <div class="full-badge">
+      <span class="badge" style="margin-bottom:0;">Semana 1</span>
+    </div>
+    <p class="full-week-title">El Comienzo de Todo</p>
+
+    <h2 class="full-sec-title">¿Qué es la fe?</h2>
+    <p class="full-body">
+      La fe no es creer algo sin razones. La fe es confiar en algo que tienes buenas
+      razones para creer, aunque no puedas verlo con tus propios ojos.
+    </p>
+    <p class="full-body">
+      Piénsalo así: no puedes ver el viento, pero sabes que existe porque ves los
+      árboles moverse. No puedes ver el amor, pero sabes que existe porque lo sientes
+      y ves cómo cambia a las personas. La fe en Dios funciona igual: hay pistas,
+      hay evidencias, hay razones. Esta guía está llena de ellas.
+    </p>
+
+    <div class="hr"></div>
+
+    <h2 class="full-sec-title">¿Por qué creer?</h2>
+    <p class="full-body">
+      Casi todos los seres humanos en la historia, en todas las culturas del mundo,
+      han creído en algo más grande que ellos mismos. Eso no es una coincidencia.
+    </p>
+    <p class="full-body">
+      Dentro de cada persona hay preguntas que la ciencia no puede responder:
+      ¿Por qué existo? ¿Qué pasa cuando muero? ¿Hay algo que valga la pena vivir?
+      Dios no es solo una tradición de familia. Es una respuesta real a preguntas reales.
+    </p>
+
+    <div class="hr"></div>
+
+    <h2 class="full-sec-title">¿Hay pruebas de Dios?</h2>
+    <p class="full-body">
+      No hay una foto de Dios, es cierto. Pero hay muchas pistas que apuntan hacia Él:
+    </p>
+    <ul class="bullet-list">
+      <li>El universo tuvo un comienzo. Todo lo que comienza tiene una causa. Algo lo inició.</li>
+      <li>La vida es increíblemente compleja y precisa. No parece un accidente.</li>
+      <li>Todos sabemos que hacer daño está mal. ¿De dónde viene ese sentido moral?</li>
+      <li>Miles de millones de personas en culturas distintas han sentido a Dios personalmente.</li>
+    </ul>
+
+    <div class="verse">
+      <p class="verse-text">"La fe es la certeza de lo que se espera, la convicción de lo que no se ve."</p>
+      <p class="verse-ref">Hebreos 11:1</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── S1 · P3 · CONECTAR + DINÁMICA ──────────────────────── -->
+<div class="page split">
+  <div class="col-left">
+
+    <span class="badge">Semana 1</span>
+
+    <div class="sec-hdr"><span class="ico">🔗</span> Conectar</div>
+    <p class="body">
+      Piensa en algo que sabes que existe pero no puedes ver directamente:
+      el amor de tu mamá, la alegría, la justicia.
+      Si esas cosas existen sin que podamos verlas con los ojos,
+      ¿por qué Dios no podría existir también?
+    </p>
+    <p class="body">
+      Esta semana, cada vez que veas algo hermoso — una flor, un atardecer,
+      una risa — pregúntate: "¿Quién hizo esto posible?"
+    </p>
+
+    <div class="spacer-md"></div>
+
+    <div class="sec-hdr"><span class="ico">⏱</span> Dinámica Familiar · 15 minutos</div>
+
+    <div class="act-card">
+      <p class="act-title">La Caja de Preguntas</p>
+      <p class="act-text">
+        Consigan una caja o un sobre. Esta semana, cada miembro de la familia
+        escribe en un papel la pregunta sobre fe que más le da curiosidad,
+        o que alguien les hizo y no supieron responder.<br><br>
+        Sin juicio. Sin vergüenza.<br><br>
+        Al final de la semana, abran la caja juntos.
+        Esas preguntas serán su guía para las próximas semanas.
+      </p>
+    </div>
+
+  </div>
+  <div class="col-right">
+    <!-- ILUSTRACIÓN: padre e hijo caminando juntos al atardecer,
+         mirando el horizonte. Estilo cálido, dorado, confianza y cercanía. -->
+    <div class="illus illus-sunset-walk">
+      <div class="illus-label">Ilustración: padre e hijo caminando al atardecer</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── S1 · P4 · CONVERSAR EN FAMILIA ─────────────────────── -->
+<div class="page split">
+  <div class="col-left">
+
+    <span class="badge">Semana 1</span>
+
+    <h1 class="page-title" style="font-size:42px;">Para Conversar<br>en Familia</h1>
+    <p class="page-sub">Tres preguntas para esta semana:</p>
+
+    <div class="q-cards">
+      <div class="q-card blue">
+        <p class="q-card-title">Pregunta 1 —</p>
+        <p class="q-card-text">Si Dios existe pero no podemos verlo, ¿cómo crees que podemos saber que está ahí?</p>
+      </div>
+      <div class="q-card purple">
+        <p class="q-card-title">Pregunta 2 —</p>
+        <p class="q-card-text">¿Hubo alguna vez que dudaste de Dios? ¿Qué pasó después?</p>
+      </div>
+      <div class="q-card green">
+        <p class="q-card-title">Pregunta 3 —</p>
+        <p class="q-card-text">Si pudieras hacerle una pregunta a Dios ahora mismo, ¿cuál sería?</p>
+      </div>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <div class="tip-card">
+      <span class="tip-ico">💬</span>
+      <div>
+        <p class="tip-title">Consejo para padres</p>
+        <p class="tip-text">
+          No tienen que tener todas las respuestas. De hecho, decir
+          "yo también me lo pregunto, vamos a descubrirlo juntos"
+          es la respuesta más poderosa que pueden dar esta semana.
+          La fe compartida empieza en la honestidad, no en la perfección.
+        </p>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-right">
+    <!-- ILUSTRACIÓN: padre e hijo sentados en sillón de noche,
+         ventana con cielo estrellado, lámpara encendida, atmósfera íntima. -->
+    <div class="illus illus-indoor-night">
+      <div class="illus-label">Ilustración: padre e hijo conversando de noche en el sillón</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  SEMANA 2 — LAS HUELLAS DE DIOS                         ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+
+<!-- ── S2 · P1 · DESCUBRIR ─────────────────────────────────── -->
+<div class="page split">
+  <div class="col-left">
+
+    <span class="badge">Semana 2</span>
+
+    <h1 class="page-title">Las Huellas<br>de Dios</h1>
+    <p class="page-sub">¿Cómo saber que alguien estuvo aquí<br>sin haberlo visto?</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="sec-hdr"><span class="ico">🔍</span> Descubrir</div>
+    <p class="body">
+      Esta semana vamos a aprender a leer las pistas que Dios
+      dejó en el mundo que nos rodea.
+      Como un detective, pero de fe.
+    </p>
+
+    <div class="d-cards">
+      <div class="d-card blue">
+        <span class="dot"></span>¿El universo dice algo?
+      </div>
+      <div class="d-card purple">
+        <span class="dot"></span>La naturaleza como evidencia
+      </div>
+      <div class="d-card green">
+        <span class="dot"></span>Lo que la ciencia no puede explicar
+      </div>
+    </div>
+
+  </div>
+  <div class="col-right">
+    <!-- ILUSTRACIÓN: niña de ~10 años mirando de cerca una mariposa
+         en su mano, campo de flores al fondo, luz dorada de tarde.
+         Estilo naturalista y cálida. Asombro genuino. -->
+    <div class="illus illus-nature-gold">
+      <div class="illus-label">Ilustración: niña con mariposa en la mano · campo de flores · tarde dorada</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── S2 · P2 · CONTENIDO PRINCIPAL ──────────────────────── -->
+<div class="page page-full">
+  <div class="full-inner">
+
+    <div class="full-badge">
+      <span class="badge" style="margin-bottom:0;">Semana 2</span>
+    </div>
+    <p class="full-week-title">Las Huellas de Dios</p>
+
+    <h2 class="full-sec-title">¿El universo dice algo?</h2>
+    <p class="full-body">
+      Cuando entras a una habitación y ves una mesa puesta con platos, cubiertos
+      y comida caliente, sabes que alguien la preparó. No ves a esa persona,
+      pero sus huellas están en todas partes.
+    </p>
+    <p class="full-body">
+      El universo es así. Tiene un orden tan preciso que los científicos lo describen
+      con matemáticas. Las estrellas, los planetas, las distancias, la gravedad:
+      todo encaja de manera perfecta para que la vida sea posible.
+      Eso no suena a accidente. Suena a diseño.
+    </p>
+
+    <div class="hr"></div>
+
+    <h2 class="full-sec-title">La naturaleza como evidencia</h2>
+    <p class="full-body">
+      Mira una hoja de árbol al trasluz. Verás una red de venas perfectas que
+      llevan agua y nutrientes a cada punto. Ningún ingeniero humano ha podido
+      replicar ese sistema con tanta eficiencia.
+    </p>
+    <p class="full-body">
+      Mira un ojo humano. Puede ajustar su foco en milisegundos, distinguir
+      millones de colores y funcionar con una cantidad minúscula de energía.
+      Cada vez que miras la naturaleza de cerca, encuentras algo que parece
+      demasiado bien hecho para ser casualidad.
+    </p>
+
+    <div class="hr"></div>
+
+    <h2 class="full-sec-title">Lo que la ciencia no puede explicar</h2>
+    <p class="full-body">
+      La ciencia es increíble. Nos ayudó a curar enfermedades, llegar a la luna
+      y entender el ADN. Pero hay preguntas que la ciencia no puede responder por sí sola:
+    </p>
+    <ul class="bullet-list">
+      <li>¿Por qué hay algo en lugar de nada?</li>
+      <li>¿Por qué el universo tiene leyes tan exactas que permiten la vida?</li>
+      <li>¿De dónde viene nuestra capacidad de amar, crear y perdonar?</li>
+    </ul>
+    <p class="full-body" style="margin-top:8px;">
+      Esas preguntas apuntan a algo que está más allá de los instrumentos.
+    </p>
+
+    <div class="verse">
+      <p class="verse-text">"Los cielos cuentan la gloria de Dios, y el firmamento proclama la obra de sus manos."</p>
+      <p class="verse-ref">Salmos 19:1</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── S2 · P3 · CONECTAR + DINÁMICA ──────────────────────── -->
+<div class="page split">
+  <div class="col-left">
+
+    <span class="badge">Semana 2</span>
+
+    <div class="sec-hdr"><span class="ico">🔗</span> Conectar</div>
+    <p class="body">
+      Sal afuera esta semana. Mira algo pequeño: una hormiga,
+      una piedra, una hoja. Pregúntate: ¿cuántas decisiones tuvo que
+      tomar el universo para que esto existiera?
+    </p>
+    <p class="body">
+      Lo que encuentres no es solo naturaleza. Es una huella.
+    </p>
+
+    <div class="spacer-md"></div>
+
+    <div class="sec-hdr"><span class="ico">⏱</span> Dinámica Familiar · 20 minutos</div>
+
+    <div class="act-card">
+      <p class="act-title">El Juego del Detective</p>
+      <p class="act-text">
+        Cada persona elige UN objeto de la naturaleza: una flor, una fruta,
+        una piedra, una pluma. Lo observan por 2 minutos en silencio.<br><br>
+        Luego cada uno dice:<br>
+        <strong>"Lo que más me sorprende de esto es..."</strong><br>
+        <strong>"Esto me hace pensar en Dios porque..."</strong><br><br>
+        No hay respuestas incorrectas. Solo asombro compartido.
+      </p>
+    </div>
+
+  </div>
+  <div class="col-right">
+    <!-- ILUSTRACIÓN: niño con lupa mirando una hormiga en el suelo,
+         expresión de asombro científico. Luz cálida, jardín o patio de casa. -->
+    <div class="illus illus-nature-gold">
+      <div class="illus-label">Ilustración: niño con lupa observando la naturaleza · jardín · luz cálida</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── S2 · P4 · CONVERSAR EN FAMILIA ─────────────────────── -->
+<div class="page split">
+  <div class="col-left">
+
+    <span class="badge">Semana 2</span>
+
+    <h1 class="page-title" style="font-size:42px;">Para Conversar<br>en Familia</h1>
+    <p class="page-sub">Tres preguntas para esta semana:</p>
+
+    <div class="q-cards">
+      <div class="q-card blue">
+        <p class="q-card-title">Pregunta 1 —</p>
+        <p class="q-card-text">¿Cuál es la cosa más increíble que conoces de la naturaleza o del universo? ¿Por qué te parece tan asombrosa?</p>
+      </div>
+      <div class="q-card purple">
+        <p class="q-card-title">Pregunta 2 —</p>
+        <p class="q-card-text">¿Alguna vez viste algo tan hermoso o complejo que pensaste "esto no puede ser casualidad"? ¿Qué fue?</p>
+      </div>
+      <div class="q-card green">
+        <p class="q-card-title">Pregunta 3 —</p>
+        <p class="q-card-text">Si Dios dejó huellas en el mundo, ¿cuál crees que es la más clara?</p>
+      </div>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <div class="tip-card">
+      <span class="tip-ico">💬</span>
+      <div>
+        <p class="tip-title">Consejo para padres</p>
+        <p class="tip-text">
+          Aprovechen esta semana para salir juntos. Un parque, el patio,
+          incluso asomarse a ver el cielo de noche. Las conversaciones más
+          profundas sobre fe pasan cuando estamos parados frente a algo
+          más grande que nosotros.
+        </p>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-right">
+    <!-- ILUSTRACIÓN: familia en el jardín de noche mirando las estrellas juntos,
+         telescopio pequeño, atmósfera de descubrimiento y unidad. -->
+    <div class="illus illus-garden-night">
+      <div class="illus-label">Ilustración: familia mirando estrellas juntos · telescopio · jardín nocturno</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  SEMANA 3 — EL UNIVERSO NO SE HIZO SOLO                 ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+
+<!-- ── S3 · P1 · DESCUBRIR ─────────────────────────────────── -->
+<div class="page split">
+  <div class="col-left">
+
+    <span class="badge">Semana 3</span>
+
+    <h1 class="page-title">El Universo<br>No Se Hizo Solo</h1>
+    <p class="page-sub">¿De dónde vino todo lo que existe?</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="sec-hdr"><span class="ico">🔍</span> Descubrir</div>
+    <p class="body">
+      Todo lo que existe tuvo un comienzo.
+      Y todo lo que comienza tiene una causa.
+      Esta semana vamos a seguir esa lógica
+      hasta el principio de todo.
+    </p>
+
+    <div class="d-cards">
+      <div class="d-card blue">
+        <span class="dot"></span>El Big Bang: ¿qué pasó antes?
+      </div>
+      <div class="d-card purple">
+        <span class="dot"></span>Si todo tiene causa, ¿quién causó a Dios?
+      </div>
+      <div class="d-card green">
+        <span class="dot"></span>¿Por qué importa de dónde venimos?
+      </div>
+    </div>
+
+  </div>
+  <div class="col-right">
+    <!-- ILUSTRACIÓN: niño mirando por un telescopio hacia galaxias.
+         Fondo azul profundo con destellos dorados. Escena nocturna.
+         Estilo ilustración cinematográfica. -->
+    <div class="illus illus-deep-space">
+      <div class="illus-label">Ilustración: niño con telescopio mirando galaxias · noche profunda · destellos dorados</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── S3 · P2 · CONTENIDO PRINCIPAL ──────────────────────── -->
+<div class="page page-full">
+  <div class="full-inner">
+
+    <div class="full-badge">
+      <span class="badge" style="margin-bottom:0;">Semana 3</span>
+    </div>
+    <p class="full-week-title">El Universo No Se Hizo Solo</p>
+
+    <h2 class="full-sec-title">El Big Bang: ¿qué pasó antes?</h2>
+    <p class="full-body">
+      La ciencia nos dice que el universo tuvo un comienzo. Hace unos 13.800 millones
+      de años, todo lo que existe — el espacio, el tiempo, la materia y la energía —
+      apareció en un instante increíblemente pequeño y empezó a expandirse.
+      A eso los científicos lo llaman el Big Bang.
+    </p>
+    <p class="full-body">
+      Pero aquí está la pregunta que la ciencia no puede responder por sí sola:
+      ¿Qué había antes? ¿Qué causó ese primer instante?
+      Si el universo tuvo un comienzo, algo lo comenzó.
+    </p>
+
+    <div class="hr"></div>
+
+    <h2 class="full-sec-title">Si todo tiene causa, ¿quién causó a Dios?</h2>
+    <p class="full-body">
+      Esta es una pregunta muy inteligente. Y merece una respuesta honesta.
+    </p>
+    <p class="full-body">
+      La lógica de "todo tiene una causa" aplica a las cosas que existen
+      dentro del universo, dentro del tiempo. Dios, si existe, sería diferente:
+      sería la causa sin causa, el ser que no comenzó porque siempre ha existido.
+    </p>
+    <p class="full-body">
+      Imagínalo así: una película tiene un director. Pero el director no es parte
+      de la película. Está afuera de ella. Dios no está dentro del universo
+      como una cosa más. Es la razón por la que el universo existe en absoluto.
+    </p>
+
+    <div class="hr"></div>
+
+    <h2 class="full-sec-title">¿Por qué importa de dónde venimos?</h2>
+    <p class="full-body">
+      No es solo una pregunta filosófica. Es la pregunta que cambia todo.
+    </p>
+    <p class="full-body">
+      Si venimos de un Creador que nos diseñó con intención, entonces:
+    </p>
+    <ul class="bullet-list">
+      <li>Nuestra vida tiene propósito.</li>
+      <li>Nuestras decisiones importan.</li>
+      <li>No estamos solos en el universo.</li>
+    </ul>
+
+    <div class="verse">
+      <p class="verse-text">"En el principio creó Dios los cielos y la tierra."</p>
+      <p class="verse-ref">Génesis 1:1</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── S3 · P3 · CONECTAR + DINÁMICA ──────────────────────── -->
+<div class="page split">
+  <div class="col-left">
+
+    <span class="badge">Semana 3</span>
+
+    <div class="sec-hdr"><span class="ico">🔗</span> Conectar</div>
+    <p class="body">
+      Practica este razonamiento esta semana:
+      cada vez que veas algo, pregúntate: "¿Quién o qué lo causó?"
+    </p>
+    <p class="body">
+      Un edificio: lo construyeron arquitectos.
+      Una canción: la compuso alguien.
+      Un bebé: tiene papá y mamá.
+      Sigue la cadena hasta el principio.
+      Siempre llegas a alguien que empezó todo.
+    </p>
+
+    <div class="spacer-md"></div>
+
+    <div class="sec-hdr"><span class="ico">⏱</span> Dinámica Familiar · 15 minutos</div>
+
+    <div class="act-card">
+      <p class="act-title">La Cadena de Causas</p>
+      <p class="act-text">
+        Turno por turno, cada persona nombra algo y el siguiente tiene
+        que decir "y eso fue causado por…"<br><br>
+        Continúen hasta que ya no puedan seguir. Cuando lleguen al final,
+        pregunten: <em>"¿Y ese último, de dónde vino?"</em><br><br>
+        Después conversen: si hay un punto de origen de todo,
+        ¿cómo lo llamarían?
+      </p>
+    </div>
+
+  </div>
+  <div class="col-right">
+    <!-- ILUSTRACIÓN: niño de pie frente a pizarra con "¿Por qué?" escrito,
+         expresión pensativa pero segura. Cuarto de casa cálido. -->
+    <div class="illus illus-indoor-warm">
+      <div class="illus-label">Ilustración: niño frente a pizarra con preguntas · cuarto cálido · expresión reflexiva</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── S3 · P4 · CONVERSAR EN FAMILIA ─────────────────────── -->
+<div class="page split">
+  <div class="col-left">
+
+    <span class="badge">Semana 3</span>
+
+    <h1 class="page-title" style="font-size:42px;">Para Conversar<br>en Familia</h1>
+    <p class="page-sub">Tres preguntas para esta semana:</p>
+
+    <div class="q-cards">
+      <div class="q-card blue">
+        <p class="q-card-title">Pregunta 1 —</p>
+        <p class="q-card-text">Si el universo tuvo un comienzo, ¿qué crees que había antes? ¿Se te ocurre alguna explicación que no sea Dios?</p>
+      </div>
+      <div class="q-card purple">
+        <p class="q-card-title">Pregunta 2 —</p>
+        <p class="q-card-text">¿Qué cambia en tu vida si venimos de un Creador con propósito, comparado con si somos un accidente del universo?</p>
+      </div>
+      <div class="q-card green">
+        <p class="q-card-title">Pregunta 3 —</p>
+        <p class="q-card-text">¿Alguien te ha preguntado alguna vez de dónde viene todo? ¿Qué le respondiste?</p>
+      </div>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <div class="tip-card">
+      <span class="tip-ico">💬</span>
+      <div>
+        <p class="tip-title">Consejo para padres</p>
+        <p class="tip-text">
+          Presenten la pregunta como una aventura, no como una clase.
+          No es "te voy a enseñar la respuesta correcta." Es "exploremos
+          juntos algo que la gente inteligente se ha preguntado siempre."
+          Eso da permiso para pensar y llegar a conclusiones propias con bases sólidas.
+        </p>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-right">
+    <!-- ILUSTRACIÓN: padre e hija en mesa de cocina, cuadernos y plumas,
+         conversando con curiosidad. Luz de tarde, exploración intelectual. -->
+    <div class="illus illus-kitchen-warm">
+      <div class="illus-label">Ilustración: padre e hija conversando en mesa de cocina · cuadernos · luz de tarde</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  SEMANA 4 — ALGUIEN DISEÑÓ TODO ESTO                    ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+
+<!-- ── S4 · P1 · DESCUBRIR ─────────────────────────────────── -->
+<div class="page split">
+  <div class="col-left">
+
+    <span class="badge">Semana 4</span>
+
+    <h1 class="page-title">Alguien Diseñó<br>Todo Esto</h1>
+    <p class="page-sub">¿Puede aparecer tanta precisión<br>por accidente?</p>
+
+    <div class="spacer-sm"></div>
+
+    <div class="sec-hdr"><span class="ico">🔍</span> Descubrir</div>
+    <p class="body">
+      Esta semana vamos a mirar la vida de muy cerca: el ADN,
+      el cuerpo humano, las condiciones del universo.
+      Y vamos a preguntar: ¿esto parece diseñado,
+      o parece un accidente?
+    </p>
+
+    <div class="d-cards">
+      <div class="d-card blue">
+        <span class="dot"></span>El relojero y el reloj
+      </div>
+      <div class="d-card purple">
+        <span class="dot"></span>El ADN: el manual de instrucciones de la vida
+      </div>
+      <div class="d-card green">
+        <span class="dot"></span>Las condiciones perfectas del universo
+      </div>
+    </div>
+
+  </div>
+  <div class="col-right">
+    <!-- ILUSTRACIÓN: primer plano de manos de niño sosteniendo un reloj
+         de engranajes transparente. Mecanismos visibles en movimiento.
+         Fondo con destellos dorados suaves. Asombro y precisión. -->
+    <div class="illus illus-mechanical">
+      <div class="illus-label">Ilustración: manos de niño sosteniendo reloj de engranajes transparente · destellos dorados</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── S4 · P2 · CONTENIDO PRINCIPAL ──────────────────────── -->
+<div class="page page-full">
+  <div class="full-inner">
+
+    <div class="full-badge">
+      <span class="badge" style="margin-bottom:0;">Semana 4</span>
+    </div>
+    <p class="full-week-title">Alguien Diseñó Todo Esto</p>
+
+    <h2 class="full-sec-title">El relojero y el reloj</h2>
+    <p class="full-body">
+      Imagina que estás caminando en el desierto y encuentras un reloj en el suelo.
+      Lo abres y ves cientos de engranajes pequeños, todos encajando perfecto,
+      moviéndose con precisión. Nadie pensaría: "qué suerte, el viento y la arena
+      formaron esto con el tiempo." Todos pensarían: "alguien lo hizo."
+    </p>
+    <p class="full-body">
+      Ahora piensa en el ojo humano. Es miles de veces más complejo que el reloj
+      más sofisticado del mundo. Si el reloj necesita un relojero,
+      ¿qué necesita el ojo? Este argumento tiene siglos de vigencia porque
+      es difícil ignorar su lógica.
+    </p>
+
+    <div class="hr"></div>
+
+    <h2 class="full-sec-title">El ADN: el manual de instrucciones de la vida</h2>
+    <p class="full-body">
+      Dentro de cada célula de tu cuerpo hay algo llamado ADN. Es una especie de código,
+      escrito en un lenguaje de cuatro "letras" químicas que se combinan en secuencias
+      precisas. En ese código está toda la información para construirte: tu altura, el
+      color de tus ojos, cómo funciona tu corazón, cómo crece tu cabello.
+    </p>
+    <p class="full-body">
+      Si encontraras en una cueva una instrucción escrita en un idioma desconocido
+      pero con información precisa, nadie diría "se formó sola." Dirían: "alguien
+      la escribió." El ADN es la instrucción más larga y precisa que existe.
+    </p>
+
+    <div class="hr"></div>
+
+    <h2 class="full-sec-title">Las condiciones perfectas del universo</h2>
+    <p class="full-body">
+      Para que la vida sea posible, el universo tiene que tener condiciones muy específicas.
+      Si la gravedad fuera un poco más fuerte, todo colapsaría. Un poco más débil,
+      nada se formaría. Los científicos calculan que la probabilidad de que todas estas
+      condiciones ocurran por accidente es prácticamente imposible.
+    </p>
+    <p class="full-body">
+      Ellos le llaman "ajuste fino del universo." Nosotros podemos llamarlo: diseño.
+    </p>
+
+    <div class="verse">
+      <p class="verse-text">"Te alabo porque soy una creación admirable. Tus obras son maravillosas, y esto lo sé muy bien."</p>
+      <p class="verse-ref">Salmos 139:14</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── S4 · P3 · CONECTAR + DINÁMICA ──────────────────────── -->
+<div class="page split">
+  <div class="col-left">
+
+    <span class="badge">Semana 4</span>
+
+    <div class="sec-hdr"><span class="ico">🔗</span> Conectar</div>
+    <p class="body">
+      Esta semana haz esto: pon tu mano frente a tus ojos y muévela.
+      En ese movimiento están involucrados huesos, músculos, nervios, tendones,
+      señales eléctricas que viajan del cerebro a la mano en milisegundos.
+    </p>
+    <p class="body">
+      Todo eso funciona sin que tengas que pensar en ello. Todo el tiempo.
+      ¿Cuántos "accidentes perfectos" tendrían que ocurrir para que eso exista?
+    </p>
+
+    <div class="spacer-md"></div>
+
+    <div class="sec-hdr"><span class="ico">⏱</span> Dinámica Familiar · 25 minutos</div>
+
+    <div class="act-card">
+      <p class="act-title">El Diseñador Invisible</p>
+      <p class="act-text">
+        Material: una hoja y pluma por persona. Cada uno dibuja algo complejo
+        que vea en casa o en su cuerpo: el ojo, una planta, el mecanismo de una
+        llave, un insecto.<br><br>
+        Luego responden: <em>"Para que esto funcione, ¿cuántas partes diferentes
+        deben trabajar juntas al mismo tiempo?"</em><br><br>
+        Comparten sus respuestas. Cierra con: <em>"Si necesita tantas partes
+        perfectas, ¿qué necesitó para existir?"</em>
+      </p>
+    </div>
+
+  </div>
+  <div class="col-right">
+    <!-- ILUSTRACIÓN: niño mirando célula amplificada en pantalla o libro,
+         expresión de fascinación. Cuarto con libros científicos y de fe
+         en el estante. -->
+    <div class="illus illus-science-blue">
+      <div class="illus-label">Ilustración: niño fascinado mirando célula amplificada · libros científicos y de fe</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── S4 · P4 · CONVERSAR EN FAMILIA ─────────────────────── -->
+<div class="page split">
+  <div class="col-left">
+
+    <span class="badge">Semana 4</span>
+
+    <h1 class="page-title" style="font-size:42px;">Para Conversar<br>en Familia</h1>
+    <p class="page-sub">Tres preguntas para esta semana:</p>
+
+    <div class="q-cards">
+      <div class="q-card blue">
+        <p class="q-card-title">Pregunta 1 —</p>
+        <p class="q-card-text">Si encuentras un reloj en el suelo sabes que alguien lo hizo. ¿Por qué no pensamos lo mismo cuando vemos el ojo humano o el universo?</p>
+      </div>
+      <div class="q-card purple">
+        <p class="q-card-title">Pregunta 2 —</p>
+        <p class="q-card-text">¿Cuál es la cosa del cuerpo humano o de la naturaleza que más te asombra? ¿Por qué crees que funciona tan bien?</p>
+      </div>
+      <div class="q-card green">
+        <p class="q-card-title">Pregunta 3 —</p>
+        <p class="q-card-text">Si Dios diseñó todo con tanto cuidado, ¿qué crees que eso dice sobre cuánto le importas tú?</p>
+      </div>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <div class="tip-card">
+      <span class="tip-ico">💬</span>
+      <div>
+        <p class="tip-title">Consejo para padres</p>
+        <p class="tip-text">
+          Permítanse sorprenderse juntos. Busquen algo increíble del cuerpo
+          humano o del universo que ninguno conocía. Cuando los hijos ven a
+          sus padres asombrarse por la creación de Dios, aprenden que la fe
+          y el asombro van de la mano. Eso no se olvida.
+        </p>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-right">
+    <!-- ILUSTRACIÓN: madre e hijo en el suelo del cuarto, libro de naturaleza
+         abierto, conversando con curiosidad y cercanía. Luz cálida de tarde. -->
+    <div class="illus illus-warm-home">
+      <div class="illus-label">Ilustración: madre e hijo con libro de naturaleza · suelo del cuarto · luz cálida de tarde</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
