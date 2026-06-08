@@ -5,3 +5,8 @@ design-bundle/
 .DS_Store
 Thumbs.db
 *.swp
+
+# PDF generator — dependências locais (não subir para produção)
+pdf/node_modules/
+pdf/package-lock.json
+pdf/output/
