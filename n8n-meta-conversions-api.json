@@ -12,7 +12,10 @@
       "name": "Webhook Hotmart",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
-      "position": [240, 300],
+      "position": [
+        240,
+        300
+      ],
       "webhookId": "hotmart-raices-de-fe"
     },
     {
@@ -31,17 +34,23 @@
       "name": "Filtrar: só Purchase",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
-      "position": [460, 300]
+      "position": [
+        460,
+        300
+      ]
     },
     {
       "parameters": {
-        "functionCode": "// ─────────────────────────────────────────────────────────────\n// Hashear dados do comprador em SHA-256 (padrão Meta CAPI)\n// Compatível com payload Hotmart PURCHASE_COMPLETE\n// ─────────────────────────────────────────────────────────────\nconst crypto = require('crypto');\n\nfunction sha256(str) {\n  if (!str || String(str).trim() === '') return null;\n  return crypto.createHash('sha256')\n    .update(String(str).trim().toLowerCase())\n    .digest('hex');\n}\n\nfunction normalizePhone(phone) {\n  if (!phone) return null;\n  const digits = String(phone).replace(/\\D/g, '');\n  if (digits.length === 0) return null;\n  // Se não tem código de país (10 dígitos), adiciona +52 (México)\n  // Ajustar conforme mercado predominante\n  if (digits.length === 10) return '52' + digits;\n  if (digits.length === 11 && digits.startsWith('1')) return digits; // US/CA\n  return digits;\n}\n\n// Compatibilidade com estruturas do Hotmart (v1 e v2)\nconst payload = $input.first().json;\nconst data = payload.data || payload;\nconst purchase = data.purchase || {};\nconst buyer = data.buyer || {};\nconst subscription = data.subscription || {};\n\n// Dados do comprador\nconst email     = buyer.email || '';\nconst fullName  = (buyer.name || '').trim();\nconst nameParts = fullName.split(/\\s+/);\nconst firstName = nameParts[0] || '';\nconst lastName  = nameParts.slice(1).join(' ') || '';\nconst phone     = buyer.phone || buyer.cellphone || '';\nconst country   = (buyer.address?.country_iso || buyer.country_iso || 'mx').toLowerCase();\nconst zip       = (buyer.address?.zip_code || buyer.zip_code || '').replace(/\\D/g, '');\n\n// Valor da compra\nconst orderValue = (purchase.price?.value || purchase.value || 9.90);\nconst orderId    = purchase.transaction || purchase.order_id || ('rf_' + Date.now());\n\n// Event ID único para deduplicação com pixel do navegador\nconst eventId = 'rf_purchase_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);\n\n// Montar user_data — apenas campos com hash válido\nconst userData = {};\nconst emHash = sha256(email);                  if (emHash) userData.em = [emHash];\nconst fnHash = sha256(firstName);              if (fnHash) userData.fn = [fnHash];\nconst lnHash = sha256(lastName);               if (lnHash) userData.ln = [lnHash];\nconst phHash = sha256(normalizePhone(phone));  if (phHash) userData.ph = [phHash];\nconst zpHash = sha256(zip);                    if (zpHash) userData.zp = [zpHash];\nuserData.country = [country];\n\nreturn [{\n  json: {\n    eventId,\n    eventTime: Math.floor(Date.now() / 1000),\n    userData,\n    customData: {\n      currency:     'USD',\n      value:        parseFloat(orderValue),\n      content_name: 'Raices de Fe',\n      content_type: 'product',\n      order_id:     orderId,\n    },\n    debug: { email, firstName, lastName, country, orderId }\n  }\n}];\n"
+        "functionCode": "// ─────────────────────────────────────────────────────────────\n// Hashear dados do comprador em SHA-256 (padrão Meta CAPI)\n// Compatível com payload Hotmart PURCHASE_COMPLETE\n// ─────────────────────────────────────────────────────────────\nconst crypto = require('crypto');\n\nfunction sha256(str) {\n  if (!str || String(str).trim() === '') return null;\n  return crypto.createHash('sha256')\n    .update(String(str).trim().toLowerCase())\n    .digest('hex');\n}\n\nfunction normalizePhone(phone) {\n  if (!phone) return null;\n  const digits = String(phone).replace(/\\D/g, '');\n  if (digits.length === 0) return null;\n  // Se não tem código de país (10 dígitos), adiciona +52 (México)\n  // Ajustar conforme mercado predominante\n  if (digits.length === 10) return '52' + digits;\n  if (digits.length === 11 && digits.startsWith('1')) return digits; // US/CA\n  return digits;\n}\n\n// Compatibilidade com estruturas do Hotmart (v1 e v2)\nconst payload = $input.first().json;\nconst data = payload.data || payload;\nconst purchase = data.purchase || {};\nconst buyer = data.buyer || {};\nconst subscription = data.subscription || {};\n\n// Dados do comprador\nconst email     = buyer.email || '';\nconst fullName  = (buyer.name || '').trim();\nconst nameParts = fullName.split(/\\s+/);\nconst firstName = nameParts[0] || '';\nconst lastName  = nameParts.slice(1).join(' ') || '';\nconst phone     = buyer.phone || buyer.cellphone || '';\nconst country   = (buyer.address?.country_iso || buyer.country_iso || 'mx').toLowerCase();\nconst zip       = (buyer.address?.zip_code || buyer.zip_code || '').replace(/\\D/g, '');\n\n// Valor da compra\nconst orderValue = (purchase.price?.value || purchase.value || 9.90);\nconst orderId    = purchase.transaction || purchase.order_id || ('rf_' + Date.now());\n\n// Event ID: prioriza o sck enviado pelo browser via URL do checkout\n// rfTrackIC() injeta ?sck=rf_ic_xxx na URL → Hotmart repassa no webhook\n// Isso garante deduplicação: mesmo event_id no browser e na CAPI\nconst sckFromBrowser =\n  (data.purchase && data.purchase.tracking && (data.purchase.tracking.source_sck || data.purchase.tracking.sck)) ||\n  (purchase && (purchase.sck || purchase.source_sck)) ||\n  null;\nconst eventId = sckFromBrowser || ('rf_purchase_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9));\n\n// Montar user_data — apenas campos com hash válido\nconst userData = {};\nconst emHash = sha256(email);                  if (emHash) userData.em = [emHash];\nconst fnHash = sha256(firstName);              if (fnHash) userData.fn = [fnHash];\nconst lnHash = sha256(lastName);               if (lnHash) userData.ln = [lnHash];\nconst phHash = sha256(normalizePhone(phone));  if (phHash) userData.ph = [phHash];\nconst zpHash = sha256(zip);                    if (zpHash) userData.zp = [zpHash];\nuserData.country = [country];\n\nreturn [{\n  json: {\n    eventId,\n    eventTime: Math.floor(Date.now() / 1000),\n    userData,\n    customData: {\n      currency:     'USD',\n      value:        parseFloat(orderValue),\n      content_name: 'Raices de Fe',\n      content_type: 'product',\n      order_id:     orderId,\n    },\n    debug: { email, firstName, lastName, country, orderId }\n  }\n}];\n"
       },
       "id": "hash-customer-data",
       "name": "Hashear dados do cliente",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
-      "position": [680, 260]
+      "position": [
+        680,
+        260
+      ]
     },
     {
       "parameters": {
@@ -50,7 +59,10 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Content-Type", "value": "application/json" }
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
           ]
         },
         "sendBody": true,
@@ -62,7 +74,10 @@
       "name": "Meta Conversions API",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
-      "position": [900, 260]
+      "position": [
+        900,
+        260
+      ]
     },
     {
       "parameters": {
@@ -74,7 +89,10 @@
       "name": "Respond 200",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
-      "position": [1120, 260]
+      "position": [
+        1120,
+        260
+      ]
     },
     {
       "parameters": {
@@ -86,26 +104,71 @@
       "name": "Respond Skip",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
-      "position": [680, 420]
+      "position": [
+        680,
+        420
+      ]
     }
   ],
   "connections": {
     "Webhook Hotmart": {
-      "main": [[{ "node": "Filtrar: só Purchase", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Filtrar: só Purchase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Filtrar: só Purchase": {
       "main": [
-        [{ "node": "Hashear dados do cliente", "type": "main", "index": 0 }],
-        [{ "node": "Respond Skip",             "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Hashear dados do cliente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Skip",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Hashear dados do cliente": {
-      "main": [[{ "node": "Meta Conversions API", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Meta Conversions API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Meta Conversions API": {
-      "main": [[{ "node": "Respond 200", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Respond 200",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "settings": { "executionOrder": "v1" },
-  "tags": ["raices-de-fe", "meta-pixel", "conversions-api"]
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    "raices-de-fe",
+    "meta-pixel",
+    "conversions-api"
+  ]
 }

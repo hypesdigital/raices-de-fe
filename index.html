@@ -144,7 +144,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
       </p>
 
       <a href="#oferta" data-cta="hero"
-         onclick="rfTrackIC()"
+         onclick="rfTrackIC(this)"
          class="cta-gold inline-flex items-center justify-center gap-2 text-navy-deep font-extrabold text-base sm:text-lg rounded-xl px-7 py-4 w-full sm:w-auto">
         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
           <rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
@@ -508,7 +508,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
           <!-- TODO: reemplazar YOUR_HOTMART_CHECKOUT_LINK por el link real del producto configurado -->
           <a href="https://pay.hotmart.com/W106183773L?utm_source=meta&utm_medium=paid&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&utm_term={{adset.name}}"
              data-cta="final"
-             onclick="rfTrackIC()"
+             onclick="rfTrackIC(this)"
              class="cta-green flex items-center justify-center gap-2.5 text-white font-extrabold text-base sm:text-lg rounded-xl px-5 w-full text-center"
              style="text-shadow:0 1px 2px rgba(0,0,0,.28); padding-top:1.05rem; padding-bottom:1.05rem;">
             <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
@@ -719,7 +719,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
   </div>
   <a href="https://pay.hotmart.com/W106183773L?utm_source=meta&utm_medium=paid&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&utm_term={{adset.name}}"
      data-cta="sticky"
-     onclick="rfTrackIC()"
+     onclick="rfTrackIC(this)"
      class="cta-gold flex-1 text-center text-navy-deep font-extrabold rounded-xl px-4 py-3.5 text-sm">
     Quiero proteger su fe
   </a>
@@ -739,15 +739,29 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
     }, { eventID: vcId });
   })();
 
-  /* ── InitiateCheckout — função global com event_id único por clique ── */
-  window.rfTrackIC = function () {
-    if (typeof fbq === 'undefined') return;
+  /* ── InitiateCheckout — event_id único + injeção na URL do checkout ──
+     Passa o mesmo event_id para o Hotmart via parâmetro ?sck=
+     O n8n lê esse valor e usa como event_id no Purchase da API de Conversões
+     garantindo deduplicação browser ↔ servidor.                            */
+  window.rfTrackIC = function (el) {
     var icId = window._rfEvId('rf_ic');
     sessionStorage.setItem('rf_ic_id', icId);
-    fbq('track', 'InitiateCheckout', {
-      value:    9.90,
-      currency: 'USD'
-    }, { eventID: icId });
+
+    // Injeta event_id na URL do checkout (se o elemento for um <a> com href real)
+    if (el && el.tagName === 'A' && el.href && el.href.indexOf('hotmart.com') > -1) {
+      try {
+        var url = new URL(el.href);
+        url.searchParams.set('sck', icId);   // Hotmart repassa 'sck' no webhook
+        el.href = url.toString();
+      } catch (e) {}
+    }
+
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'InitiateCheckout', {
+        value:    9.90,
+        currency: 'USD'
+      }, { eventID: icId });
+    }
   };
 
   /* ---- Accordion ---- */
