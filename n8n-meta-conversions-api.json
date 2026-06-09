@@ -12,7 +12,8 @@
       "name": "Webhook Hotmart",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
-      "position": [240, 300]
+      "position": [240, 300],
+      "webhookId": "hotmart-raices-de-fe"
     },
     {
       "parameters": {
@@ -34,7 +35,7 @@
     },
     {
       "parameters": {
-        "functionCode": "// ────────────────────────────────────────────────────\n// Hashear dados do cliente em SHA-256 (padrão Meta)\n// ────────────────────────────────────────────────────\nconst crypto = require('crypto');\n\nfunction sha256(str) {\n  if (!str) return null;\n  return crypto.createHash('sha256')\n    .update(String(str).trim().toLowerCase())\n    .digest('hex');\n}\n\nfunction normalizePhone(phone) {\n  if (!phone) return null;\n  // Remove tudo que não for dígito e adiciona código de país se necessário\n  let digits = String(phone).replace(/\\D/g, '');\n  // México: +52, Colômbia: +57 — ajustar conforme país\n  if (digits.length === 10) digits = '52' + digits; // padrão México\n  return digits;\n}\n\nconst item = $input.first().json;\nconst buyer = item.data?.buyer || item.buyer || {};\n\n// Dados do comprador vindos do Hotmart\nconst email = buyer.email || '';\nconst fullName = (buyer.name || '').split(' ');\nconst firstName = fullName[0] || '';\nconst lastName = fullName.slice(1).join(' ') || '';\nconst phone = buyer.phone || buyer.cellphone || '';\nconst country = (buyer.address?.country_iso || buyer.country || 'MX').toLowerCase();\n\n// Gerar event_id único para deduplicação\nconst eventId = 'rf_purchase_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);\n\nreturn [{\n  json: {\n    raw: item,\n    eventId,\n    eventTime: Math.floor(Date.now() / 1000),\n    userData: {\n      em:      [sha256(email)].filter(Boolean),\n      fn:      [sha256(firstName)].filter(Boolean),\n      ln:      [sha256(lastName)].filter(Boolean),\n      ph:      [sha256(normalizePhone(phone))].filter(v => v !== null),\n      country: [country],\n    },\n    customData: {\n      currency:     'USD',\n      value:        9.90,\n      content_name: 'Raices de Fe',\n      content_type: 'product',\n      order_id:     item.data?.purchase?.transaction || item.purchase?.transaction || eventId,\n    }\n  }\n}];\n"
+        "functionCode": "// ─────────────────────────────────────────────────────────────\n// Hashear dados do comprador em SHA-256 (padrão Meta CAPI)\n// Compatível com payload Hotmart PURCHASE_COMPLETE\n// ─────────────────────────────────────────────────────────────\nconst crypto = require('crypto');\n\nfunction sha256(str) {\n  if (!str || String(str).trim() === '') return null;\n  return crypto.createHash('sha256')\n    .update(String(str).trim().toLowerCase())\n    .digest('hex');\n}\n\nfunction normalizePhone(phone) {\n  if (!phone) return null;\n  const digits = String(phone).replace(/\\D/g, '');\n  if (digits.length === 0) return null;\n  // Se não tem código de país (10 dígitos), adiciona +52 (México)\n  // Ajustar conforme mercado predominante\n  if (digits.length === 10) return '52' + digits;\n  if (digits.length === 11 && digits.startsWith('1')) return digits; // US/CA\n  return digits;\n}\n\n// Compatibilidade com estruturas do Hotmart (v1 e v2)\nconst payload = $input.first().json;\nconst data = payload.data || payload;\nconst purchase = data.purchase || {};\nconst buyer = data.buyer || {};\nconst subscription = data.subscription || {};\n\n// Dados do comprador\nconst email     = buyer.email || '';\nconst fullName  = (buyer.name || '').trim();\nconst nameParts = fullName.split(/\\s+/);\nconst firstName = nameParts[0] || '';\nconst lastName  = nameParts.slice(1).join(' ') || '';\nconst phone     = buyer.phone || buyer.cellphone || '';\nconst country   = (buyer.address?.country_iso || buyer.country_iso || 'mx').toLowerCase();\nconst zip       = (buyer.address?.zip_code || buyer.zip_code || '').replace(/\\D/g, '');\n\n// Valor da compra\nconst orderValue = (purchase.price?.value || purchase.value || 9.90);\nconst orderId    = purchase.transaction || purchase.order_id || ('rf_' + Date.now());\n\n// Event ID único para deduplicação com pixel do navegador\nconst eventId = 'rf_purchase_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);\n\n// Montar user_data — apenas campos com hash válido\nconst userData = {};\nconst emHash = sha256(email);                  if (emHash) userData.em = [emHash];\nconst fnHash = sha256(firstName);              if (fnHash) userData.fn = [fnHash];\nconst lnHash = sha256(lastName);               if (lnHash) userData.ln = [lnHash];\nconst phHash = sha256(normalizePhone(phone));  if (phHash) userData.ph = [phHash];\nconst zpHash = sha256(zip);                    if (zpHash) userData.zp = [zpHash];\nuserData.country = [country];\n\nreturn [{\n  json: {\n    eventId,\n    eventTime: Math.floor(Date.now() / 1000),\n    userData,\n    customData: {\n      currency:     'USD',\n      value:        parseFloat(orderValue),\n      content_name: 'Raices de Fe',\n      content_type: 'product',\n      order_id:     orderId,\n    },\n    debug: { email, firstName, lastName, country, orderId }\n  }\n}];\n"
       },
       "id": "hash-customer-data",
       "name": "Hashear dados do cliente",
@@ -45,22 +46,16 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://graph.facebook.com/v18.0/1380867890531576/events",
+        "url": "https://graph.facebook.com/v18.0/1380867890531576/events",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
+            { "name": "Content-Type", "value": "application/json" }
           ]
         },
         "sendBody": true,
-        "bodyParameters": {
-          "parameters": []
-        },
         "specifyBody": "json",
-        "jsonBody": "={\n  \"data\": [{\n    \"event_name\": \"Purchase\",\n    \"event_time\": {{ $json.eventTime }},\n    \"event_id\": \"{{ $json.eventId }}\",\n    \"event_source_url\": \"https://raicesdefe.hypes.blog\",\n    \"action_source\": \"website\",\n    \"user_data\": {{ JSON.stringify($json.userData) }},\n    \"custom_data\": {{ JSON.stringify($json.customData) }}\n  }],\n  \"access_token\": \"{{ $env.META_API_TOKEN }}\"\n}",
+        "jsonBody": "={{ JSON.stringify({\n  data: [{\n    event_name: 'Purchase',\n    event_time: $json.eventTime,\n    event_id: $json.eventId,\n    event_source_url: 'https://raicesdefe.hypes.blog',\n    action_source: 'website',\n    user_data: $json.userData,\n    custom_data: $json.customData\n  }],\n  access_token: $vars.META_API_TOKEN\n}) }}",
         "options": {}
       },
       "id": "meta-conversions-api",
@@ -72,7 +67,7 @@
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "={ \"status\": \"ok\" }",
+        "responseBody": "={{ JSON.stringify({ status: 'ok', eventId: $json.eventId }) }}",
         "options": {}
       },
       "id": "respond-ok",
@@ -91,7 +86,7 @@
       "name": "Respond Skip",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
-      "position": [680, 400]
+      "position": [680, 420]
     }
   ],
   "connections": {
@@ -111,9 +106,6 @@
       "main": [[{ "node": "Respond 200", "type": "main", "index": 0 }]]
     }
   },
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "staticData": null,
+  "settings": { "executionOrder": "v1" },
   "tags": ["raices-de-fe", "meta-pixel", "conversions-api"]
 }
