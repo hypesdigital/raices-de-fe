@@ -1,0 +1,119 @@
+{
+  "name": "Raíces de Fe — Meta Conversions API (Purchase)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "hotmart-raices",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-hotmart",
+      "name": "Webhook Hotmart",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.event }}",
+              "operation": "equals",
+              "value2": "PURCHASE_COMPLETE"
+            }
+          ]
+        }
+      },
+      "id": "filter-purchase",
+      "name": "Filtrar: só Purchase",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// ────────────────────────────────────────────────────\n// Hashear dados do cliente em SHA-256 (padrão Meta)\n// ────────────────────────────────────────────────────\nconst crypto = require('crypto');\n\nfunction sha256(str) {\n  if (!str) return null;\n  return crypto.createHash('sha256')\n    .update(String(str).trim().toLowerCase())\n    .digest('hex');\n}\n\nfunction normalizePhone(phone) {\n  if (!phone) return null;\n  // Remove tudo que não for dígito e adiciona código de país se necessário\n  let digits = String(phone).replace(/\\D/g, '');\n  // México: +52, Colômbia: +57 — ajustar conforme país\n  if (digits.length === 10) digits = '52' + digits; // padrão México\n  return digits;\n}\n\nconst item = $input.first().json;\nconst buyer = item.data?.buyer || item.buyer || {};\n\n// Dados do comprador vindos do Hotmart\nconst email = buyer.email || '';\nconst fullName = (buyer.name || '').split(' ');\nconst firstName = fullName[0] || '';\nconst lastName = fullName.slice(1).join(' ') || '';\nconst phone = buyer.phone || buyer.cellphone || '';\nconst country = (buyer.address?.country_iso || buyer.country || 'MX').toLowerCase();\n\n// Gerar event_id único para deduplicação\nconst eventId = 'rf_purchase_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);\n\nreturn [{\n  json: {\n    raw: item,\n    eventId,\n    eventTime: Math.floor(Date.now() / 1000),\n    userData: {\n      em:      [sha256(email)].filter(Boolean),\n      fn:      [sha256(firstName)].filter(Boolean),\n      ln:      [sha256(lastName)].filter(Boolean),\n      ph:      [sha256(normalizePhone(phone))].filter(v => v !== null),\n      country: [country],\n    },\n    customData: {\n      currency:     'USD',\n      value:        9.90,\n      content_name: 'Raices de Fe',\n      content_type: 'product',\n      order_id:     item.data?.purchase?.transaction || item.purchase?.transaction || eventId,\n    }\n  }\n}];\n"
+      },
+      "id": "hash-customer-data",
+      "name": "Hashear dados do cliente",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [680, 260]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v18.0/1380867890531576/events",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": []
+        },
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": [{\n    \"event_name\": \"Purchase\",\n    \"event_time\": {{ $json.eventTime }},\n    \"event_id\": \"{{ $json.eventId }}\",\n    \"event_source_url\": \"https://raicesdefe.hypes.blog\",\n    \"action_source\": \"website\",\n    \"user_data\": {{ JSON.stringify($json.userData) }},\n    \"custom_data\": {{ JSON.stringify($json.customData) }}\n  }],\n  \"access_token\": \"{{ $env.META_API_TOKEN }}\"\n}",
+        "options": {}
+      },
+      "id": "meta-conversions-api",
+      "name": "Meta Conversions API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [900, 260]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"status\": \"ok\" }",
+        "options": {}
+      },
+      "id": "respond-ok",
+      "name": "Respond 200",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1120, 260]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"status\": \"skipped\", \"reason\": \"not a purchase event\" }",
+        "options": {}
+      },
+      "id": "respond-skip",
+      "name": "Respond Skip",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [680, 400]
+    }
+  ],
+  "connections": {
+    "Webhook Hotmart": {
+      "main": [[{ "node": "Filtrar: só Purchase", "type": "main", "index": 0 }]]
+    },
+    "Filtrar: só Purchase": {
+      "main": [
+        [{ "node": "Hashear dados do cliente", "type": "main", "index": 0 }],
+        [{ "node": "Respond Skip",             "type": "main", "index": 0 }]
+      ]
+    },
+    "Hashear dados do cliente": {
+      "main": [[{ "node": "Meta Conversions API", "type": "main", "index": 0 }]]
+    },
+    "Meta Conversions API": {
+      "main": [[{ "node": "Respond 200", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": ["raices-de-fe", "meta-pixel", "conversions-api"]
+}
