@@ -34,60 +34,51 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
-<!-- Preconnect crítico (apenas o necessário) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Resource hints — DNS/preconnect para domínios críticos -->
 <link rel="preconnect" href="https://connect.facebook.net">
 <link rel="dns-prefetch" href="https://connect.facebook.net">
+<link rel="preconnect" href="https://cdn.utmify.com.br" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.utmify.com.br">
+<link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- Preload LCP — hero image em WebP -->
-<link rel="preload" as="image" href="assets/mockup-kit-principal.webp" fetchpriority="high" type="image/webp">
+<!-- Preload: imagem hero (LCP) -->
+<link rel="preload" as="image" href="assets/mockup-kit-principal.png" fetchpriority="high">
 
-<!-- Google Fonts -->
+<!-- Google Fonts — swap evita FOIT -->
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700;8..60,800&display=swap" rel="stylesheet">
 
-<!-- Tailwind CDN — movido para </body> para não bloquear render -->
-<!-- config + script injetados no final do body -->
+<!-- Tailwind CDN (JIT) — TODO: substituir por tailwind.css compilado após build Hostinger -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy:        '#1B3A6B',
+          'navy-2':    '#2E5A9E',
+          'navy-deep': '#13294C',
+          gold:        '#C9A84C',
+          'gold-2':    '#E0C46E',
+          'gold-dk':   '#B0902F',
+          ink:         '#1A1A2E',
+          mist:        '#F0F4FF',
+        },
+        fontFamily: {
+          serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+          sans:  ['"Libre Franklin"', 'system-ui', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
 
 <style>
-  /* ╔══════════════════════════════════════════════════════════════
-     ║  CSS CRÍTICO (above-fold) — aplicado antes do Tailwind
-     ║  Previne FOUC enquanto Tailwind carrega no fim do body
-     ╚══════════════════════════════════════════════════════════════ */
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:"Libre Franklin",system-ui,sans-serif;background:#fff;color:#1A1A2E;-webkit-font-smoothing:antialiased;padding-bottom:5rem}
-  @media(min-width:640px){body{padding-bottom:0}}
-  h1,h2,h3,.font-serif{font-family:"Source Serif 4",Georgia,serif}
-  img{max-width:100%;height:auto;display:block}
-
-  /* ── HEADER ── */
-  .rf-hdr{position:fixed;top:0;left:0;right:0;z-index:50;background:#C8102E;color:#fff}
-  .rf-hdr>div{max-width:72rem;margin:0 auto;padding:.625rem 1rem;display:flex;align-items:center;justify-content:center;gap:.75rem;text-align:center}
-  .rf-hdr span{font-size:.875rem;font-weight:600;letter-spacing:.025em}
-
-  /* ── HERO ── */
-  .rf-hero-s{position:relative;overflow:hidden;background:linear-gradient(to bottom right,#13294C,#1B3A6B,#2E5A9E);color:#fff;padding-top:5rem}
-  .rf-hero-g{position:relative;max-width:72rem;margin:0 auto;padding:3rem 1.25rem;display:grid;gap:2.5rem;align-items:center}
-  @media(min-width:1024px){.rf-hero-g{grid-template-columns:1fr 1fr;padding:5rem 1.5rem}}
-  .rf-hero-t{text-align:center;order:2}
-  @media(min-width:1024px){.rf-hero-t{text-align:left;order:1}}
-  .rf-hero-t>span:first-child{display:inline-block;font-size:.6875rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.4);border-radius:9999px;padding:.375rem 1rem;margin-bottom:1.5rem;background:rgba(201,168,76,.05)}
-  .rf-hero-t h1{font-family:"Source Serif 4",Georgia,serif;font-weight:800;line-height:1.08;font-size:1.875rem;margin-bottom:1.25rem;color:#fff}
-  @media(min-width:640px){.rf-hero-t h1{font-size:2.25rem}}
-  @media(min-width:1024px){.rf-hero-t h1{font-size:3rem}}
-  .rf-hero-t h1 span{display:block;color:#E0C46E;margin-top:.25rem}
-  .rf-hero-t>p{font-size:1rem;color:rgba(255,255,255,.8);line-height:1.625;max-width:36rem;margin:0 auto 2rem}
-  @media(min-width:640px){.rf-hero-t>p{font-size:1.125rem}}
-  .rf-hero-t>p strong{color:#fff;font-weight:600}
-  .rf-hero-t .rf-secure{margin-top:1rem;font-size:.875rem;color:rgba(255,255,255,.65);display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:0}
-  @media(min-width:1024px){.rf-hero-t .rf-secure{justify-content:flex-start}}
-  .rf-hero-i{order:1;display:flex;justify-content:center}
-  @media(min-width:1024px){.rf-hero-i{order:2}}
-  .rf-hero-i img{width:100%;max-width:460px}
-  @media(min-width:1024px){.rf-hero-i img{max-width:560px}}
-  .rf-wave{height:2.5rem;background:#fff;border-top-left-radius:50% 100%;border-top-right-radius:50% 100%}
-  @media(min-width:640px){.rf-wave{height:3.5rem}}
+  html { scroll-behavior: smooth; }
+  body { font-family: "Libre Franklin", system-ui, sans-serif; }
+  h1,h2,h3,.font-serif { font-family: "Source Serif 4", Georgia, serif; }
 
   /* CTA dourado */
   .cta-gold {
@@ -155,7 +146,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
 <body class="bg-white text-ink antialiased pb-20 sm:pb-0">
 
 <!-- ================= HEADER FIJO ================= -->
-<header class="rf-hdr fixed top-0 inset-x-0 z-50 bg-[#C8102E] text-white">
+<header class="fixed top-0 inset-x-0 z-50 bg-[#C8102E] text-white">
   <div class="max-w-6xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3 text-center">
     <span class="text-sm sm:text-base font-semibold tracking-wide">
       <span class="text-white">⚡</span> PRECIO DE LANZAMIENTO
@@ -169,14 +160,14 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
 
 <!-- ================= DOBRA 1 — HERO ================= -->
 <!-- META PIXEL: ViewContent -->
-<section class="rf-hero-s relative overflow-hidden bg-gradient-to-br from-navy-deep via-navy to-navy-2 text-white pt-20">
+<section class="relative overflow-hidden bg-gradient-to-br from-navy-deep via-navy to-navy-2 text-white pt-20">
   <div class="absolute inset-0 hero-glow pointer-events-none"></div>
   <div class="absolute inset-0 opacity-[0.04] pointer-events-none"
        style="background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:26px 26px;"></div>
 
-  <div class="rf-hero-g relative max-w-6xl mx-auto px-5 sm:px-6 py-12 sm:py-16 lg:py-20 grid lg:grid-cols-2 gap-10 lg:gap-8 items-center">
+  <div class="relative max-w-6xl mx-auto px-5 sm:px-6 py-12 sm:py-16 lg:py-20 grid lg:grid-cols-2 gap-10 lg:gap-8 items-center">
     <!-- LEFT -->
-    <div class="rf-hero-t text-center lg:text-left order-2 lg:order-1">
+    <div class="text-center lg:text-left order-2 lg:order-1">
       <span class="inline-block text-[11px] sm:text-xs font-bold tracking-[0.18em] uppercase text-gold border border-gold/40 rounded-full px-4 py-1.5 mb-6 bg-gold/5">
         Para familias cristianas
       </span>
@@ -200,7 +191,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
         Quiero proteger la fe de mi hijo
       </a>
 
-      <p class="rf-secure mt-4 text-sm text-white/65 flex items-center justify-center lg:justify-start gap-2">
+      <p class="mt-4 text-sm text-white/65 flex items-center justify-center lg:justify-start gap-2">
         <svg class="w-4 h-4 text-gold" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z"/>
         </svg>
@@ -209,21 +200,18 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
     </div>
 
     <!-- RIGHT — hero mockup -->
-    <div class="rf-hero-i order-1 lg:order-2 flex justify-center">
-      <!-- INSERIR: mockup-kit-principal.webp -->
-      <picture>
-        <source srcset="assets/mockup-kit-principal.webp" type="image/webp">
-        <img src="assets/mockup-kit-principal.png"
-             alt="Kit digital completo Raíces de Fe — libro, guías, tablet y celular"
-             class="floaty w-full max-w-[460px] lg:max-w-[560px] drop-shadow-2xl"
-             width="1536" height="1024"
-             loading="eager" fetchpriority="high" decoding="async">
-      </picture>
+    <div class="order-1 lg:order-2 flex justify-center">
+      <!-- INSERIR: mockup-kit-principal.png -->
+      <img src="assets/mockup-kit-principal.png"
+           alt="Kit digital completo Raíces de Fe — libro, guías, tablet y celular"
+           class="floaty w-full max-w-[460px] lg:max-w-[560px] drop-shadow-2xl"
+           width="1536" height="1024"
+           loading="eager" fetchpriority="high">
     </div>
   </div>
 
   <!-- bottom wave -->
-  <div class="rf-wave h-10 sm:h-14 bg-white" style="border-top-left-radius:50% 100%;border-top-right-radius:50% 100%;"></div>
+  <div class="h-10 sm:h-14 bg-white" style="border-top-left-radius:50% 100%;border-top-right-radius:50% 100%;"></div>
 </section>
 
 <!-- ================= DOBRA 2 — PRUEBA SOCIAL ================= -->
@@ -262,28 +250,18 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
 
     <div id="pvCarousel" class="relative max-w-[420px] mx-auto">
       <div id="pvViewport" class="relative mx-auto" style="aspect-ratio:1024/1536;">
-        <picture>
-        <source srcset="assets/preview-semana-01.webp" type="image/webp">
         <img src="assets/preview-semana-01.png" alt="Semana 1 — El Comienzo de Todo"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
              style="opacity:1;" loading="lazy" width="1024" height="1536">
-        <picture>
-        <source srcset="assets/preview-semana-07.webp" type="image/webp">
         <img src="assets/preview-semana-07.png" alt="Semana 7 — Para Conversar en Familia"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
              style="opacity:0;" loading="lazy" width="1024" height="1536">
-        <picture>
-        <source srcset="assets/preview-semana-29.webp" type="image/webp">
         <img src="assets/preview-semana-29.png" alt="Semana 29 — Fe y Ciencia"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
              style="opacity:0;" loading="lazy" width="1024" height="1535">
-        <picture>
-        <source srcset="assets/preview-semana-38.webp" type="image/webp">
         <img src="assets/preview-semana-38.png" alt="Semana 38 — Cuando Alguien Cuestiona Tu Fe"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
              style="opacity:0;" loading="lazy" width="1024" height="1535">
-        <picture>
-        <source srcset="assets/preview-semana-52.webp" type="image/webp">
         <img src="assets/preview-semana-52.png" alt="Semana 52 — Una Fe Que Te Pertenece"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
              style="opacity:0;" loading="lazy" width="1024" height="1535">
@@ -291,12 +269,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
 
       <button type="button" id="pvPrev" aria-label="Anterior"
         class="absolute left-1 sm:-left-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-navy text-white flex items-center justify-center shadow-lg hover:bg-gold transition-colors">
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 5-7 7 7 7"/>
-      </picture>
-      </picture>
-      </picture>
-      </picture>
-      </picture></svg>
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 5-7 7 7 7"/></svg>
       </button>
       <button type="button" id="pvNext" aria-label="Siguiente"
         class="absolute right-1 sm:-right-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-navy text-white flex items-center justify-center shadow-lg hover:bg-gold transition-colors">
@@ -408,9 +381,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
       <article class="bg-white rounded-2xl shadow-lg ring-1 ring-navy/5 p-6 flex flex-col w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
         <!-- INSERIR: mockup-bono1-guia-para-padres.png -->
         <div class="flex justify-center mb-6">
-          <picture>
-        <source srcset="assets/mockup-bono1-guia-para-padres.webp" type="image/webp">
-        <img src="assets/mockup-bono1-guia-para-padres.png" alt="Guía para Padres"
+          <img src="assets/mockup-bono1-guia-para-padres.png" alt="Guía para Padres"
                class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy" width="1024" height="1536">
         </div>
         <h3 class="font-serif font-bold text-lg text-ink mb-3 leading-snug">
@@ -429,9 +400,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
       <article class="bg-white rounded-2xl shadow-lg ring-1 ring-navy/5 p-6 flex flex-col w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
         <!-- INSERIR: mockup-bono2-manual-errores.png -->
         <div class="flex justify-center mb-6">
-          <picture>
-        <source srcset="assets/mockup-bono2-manual-errores.webp" type="image/webp">
-        <img src="assets/mockup-bono2-manual-errores.png" alt="Manual de Errores Comunes"
+          <img src="assets/mockup-bono2-manual-errores.png" alt="Manual de Errores Comunes"
                class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy" width="1024" height="1536">
         </div>
         <h3 class="font-serif font-bold text-lg text-ink mb-3 leading-snug">
@@ -450,9 +419,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
       <article class="bg-white rounded-2xl shadow-lg ring-1 ring-navy/5 p-6 flex flex-col w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
         <!-- INSERIR: mockup-bono3-guia-salvacion.png -->
         <div class="flex justify-center mb-6">
-          <picture>
-        <source srcset="assets/mockup-bono3-guia-salvacion.webp" type="image/webp">
-        <img src="assets/mockup-bono3-guia-salvacion.png" alt="Guía de Salvación"
+          <img src="assets/mockup-bono3-guia-salvacion.png" alt="Guía de Salvación"
                class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy" width="1024" height="1536">
         </div>
         <h3 class="font-serif font-bold text-lg text-ink mb-3 leading-snug">
@@ -488,9 +455,6 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
               style="background:linear-gradient(180deg,#EAD891 0%,#C9A84C 58%,#B0902F 100%);">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
             <path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/>
-      </picture>
-      </picture>
-      </picture>
           </svg>
           Más completo
         </span>
@@ -619,9 +583,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
 <section class="bg-navy text-white">
   <div class="max-w-2xl mx-auto px-5 sm:px-6 py-16 sm:py-20 text-center">
     <!-- INSERIR: selo-garantia-7dias.png -->
-    <picture>
-        <source srcset="assets/selo-garantia-7dias.webp" type="image/webp">
-        <img src="assets/selo-garantia-7dias.png"
+    <img src="assets/selo-garantia-7dias.png"
          alt="Sello de garantía 7 días — 100% de tu dinero de vuelta, sin preguntas"
          class="mx-auto mb-8 w-44 h-44 sm:w-52 sm:h-52 object-contain drop-shadow-2xl" loading="lazy" width="1024" height="1024">
 
@@ -645,8 +607,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
     <div class="relative" id="tCarousel">
       <button type="button" id="tPrev" aria-label="Anterior"
         class="absolute left-0 sm:-left-1 top-[calc(50%-1.25rem)] -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-navy text-white flex items-center justify-center shadow-lg hover:bg-gold transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 5-7 7 7 7"/>
-      </picture></svg>
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 5-7 7 7 7"/></svg>
       </button>
       <button type="button" id="tNext" aria-label="Siguiente"
         class="absolute right-0 sm:-right-1 top-[calc(50%-1.25rem)] -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-navy text-white flex items-center justify-center shadow-lg hover:bg-gold transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
@@ -967,34 +928,6 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
     start();
   })();
 </script>
-
-<!-- ═══════════════════════════════════════════════════════════
-     Tailwind CDN — carregado APÓS todo o HTML para não bloquear
-     render. O CSS crítico acima garante que o hero não pisca.
-     ═══════════════════════════════════════════════════════════ -->
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          navy:        '#1B3A6B',
-          'navy-2':    '#2E5A9E',
-          'navy-deep': '#13294C',
-          gold:        '#C9A84C',
-          'gold-2':    '#E0C46E',
-          'gold-dk':   '#B0902F',
-          ink:         '#1A1A2E',
-          mist:        '#F0F4FF',
-        },
-        fontFamily: {
-          serif: ['"Source Serif 4"', 'Georgia', 'serif'],
-          sans:  ['"Libre Franklin"', 'system-ui', 'sans-serif'],
-        },
-      }
-    }
-  }
-</script>
-<script src="https://cdn.tailwindcss.com"></script>
 
 </body>
 </html>
