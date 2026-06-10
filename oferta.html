@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raíces de Fe — Que tu hijo no pierda su fe</title>
+<meta name="description" content="El método que ayuda a niños de 8 a 14 años a entender su fe, para que no la pierdan cuando el mundo los cuestione.">
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Meta Pixel Code — com deduplicação por event_id -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1380867890531576');
+
+// ── Geração de event_id único (deduplicação browser ↔ API Conversões) ──
+window._rfEvId = function(prefix) {
+  return (prefix || 'rf') + '_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+};
+
+// PageView — event_id salvo em sessionStorage para reuso no n8n se necessário
+var _rfPvId = window._rfEvId('rf_pv');
+sessionStorage.setItem('rf_pv_id', _rfPvId);
+fbq('track', 'PageView', {}, { eventID: _rfPvId });
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<!-- Preconnect — apenas os necessários -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://connect.facebook.net">
+<link rel="dns-prefetch" href="https://connect.facebook.net">
+
+<!-- Preload LCP hero (WebP com fallback) -->
+<link rel="preload" as="image" href="assets/mockup-kit-principal.webp" fetchpriority="high" type="image/webp">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700;8..60,800&display=swap" rel="stylesheet">
+
+<!-- Tailwind CDN — MANTIDO NO HEAD (não mover) -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy:        '#1B3A6B',
+          'navy-2':    '#2E5A9E',
+          'navy-deep': '#13294C',
+          gold:        '#C9A84C',
+          'gold-2':    '#E0C46E',
+          'gold-dk':   '#B0902F',
+          ink:         '#1A1A2E',
+          mist:        '#F0F4FF',
+        },
+        fontFamily: {
+          serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+          sans:  ['"Libre Franklin"', 'system-ui', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: "Libre Franklin", system-ui, sans-serif; }
+  h1,h2,h3,.font-serif { font-family: "Source Serif 4", Georgia, serif; }
+
+  /* CTA dourado */
+  .cta-gold {
+    background: linear-gradient(180deg, #E0C46E 0%, #C9A84C 55%, #B0902F 100%);
+    box-shadow: 0 10px 28px -8px rgba(176,144,47,.65), inset 0 1px 0 rgba(255,255,255,.45);
+  }
+  .cta-gold:hover  { filter: brightness(1.05); transform: translateY(-2px); }
+  .cta-gold:active { transform: translateY(0); }
+  .cta-gold { transition: transform .18s ease, filter .18s ease; }
+
+  /* CTA verde */
+  .cta-green {
+    background: linear-gradient(180deg, #25A35A 0%, #15803D 55%, #0F6431 100%);
+    box-shadow: 0 10px 28px -8px rgba(15,100,49,.6), inset 0 1px 0 rgba(255,255,255,.32);
+    transition: transform .18s ease, filter .18s ease;
+  }
+  .cta-green:hover  { filter: brightness(1.06); transform: translateY(-2px); }
+  .cta-green:active { transform: translateY(0); }
+
+  /* Accordion */
+  .acc-panel { max-height: 0; overflow: hidden; transition: max-height .38s cubic-bezier(.4,0,.2,1); }
+  .acc-item[data-open="true"] .acc-panel { max-height: 320px; }
+  .acc-item[data-open="true"] .acc-chev  { transform: rotate(45deg); }
+  .acc-chev { transition: transform .3s ease; }
+
+  /* Hero glow */
+  .hero-glow { background: radial-gradient(60% 55% at 70% 40%, rgba(201,168,76,.22), transparent 70%); }
+
+  @keyframes floaty { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-10px) } }
+  .floaty { animation: floaty 6s ease-in-out infinite; will-change: transform; }
+
+  /* Carrusel dots */
+  .t-dot { width:10px; height:10px; border-radius:9999px; background:rgba(27,58,107,.25); transition:all .3s ease; }
+  .t-dot:hover { background:rgba(27,58,107,.5); }
+  .t-dot[data-active="true"] { width:28px; background:#C9A84C; }
+</style>
+
+<!-- UTMify — Pixel -->
+<script>
+  window.pixelId = "6a2852e791682d2ec9ead75c";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+
+<!-- UTMify — Script de UTMs -->
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+<!-- UTMify — Back Redirect -->
+<script
+  src="https://cdn.utmify.com.br/scripts/back-redirect/latest.js"
+  async
+  defer
+></script>
+
+</head>
+
+<body class="bg-white text-ink antialiased pb-20 sm:pb-0">
+
+<!-- ================= HEADER FIJO ================= -->
+<header class="fixed top-0 inset-x-0 z-50 bg-[#C8102E] text-white">
+  <div class="max-w-6xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3 text-center">
+    <span class="text-sm sm:text-base font-semibold tracking-wide">
+      <span class="text-white">⚡</span> PRECIO DE LANZAMIENTO
+      <span class="hidden sm:inline text-white/70 font-normal">· Solo por tiempo limitado</span>
+    </span>
+    <span id="countdown" class="hidden xs:flex items-center gap-1 font-mono text-sm bg-white/10 px-2.5 py-0.5 rounded-md tabular-nums">
+      00:00:00
+    </span>
+  </div>
+</header>
+
+<!-- ================= DOBRA 1 — HERO ================= -->
+<!-- META PIXEL: ViewContent -->
+<section class="relative overflow-hidden bg-gradient-to-br from-navy-deep via-navy to-navy-2 text-white pt-20">
+  <div class="absolute inset-0 hero-glow pointer-events-none"></div>
+  <div class="absolute inset-0 opacity-[0.04] pointer-events-none"
+       style="background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:26px 26px;"></div>
+
+  <div class="relative max-w-6xl mx-auto px-5 sm:px-6 py-12 sm:py-16 lg:py-20 grid lg:grid-cols-2 gap-10 lg:gap-8 items-center">
+    <!-- LEFT -->
+    <div class="text-center lg:text-left order-2 lg:order-1">
+      <span class="inline-block text-[11px] sm:text-xs font-bold tracking-[0.18em] uppercase text-gold border border-gold/40 rounded-full px-4 py-1.5 mb-6 bg-gold/5">
+        Para familias cristianas
+      </span>
+
+      <h1 class="font-serif font-extrabold leading-[1.08] text-3xl sm:text-4xl lg:text-5xl mb-5">
+        Tu hijo sabe los versículos.
+        <span class="block text-gold-2 mt-1">Pero no sabe por qué cree en ellos.</span>
+      </h1>
+
+      <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8">
+        Descubre el método que ayuda a niños de <strong class="text-white font-semibold">8 a 14 años</strong>
+        a entender su fe, para que no la pierdan cuando el mundo los cuestione.
+      </p>
+
+      <a href="#oferta" data-cta="hero"
+         onclick="rfTrackIC(this)"
+         class="cta-gold inline-flex items-center justify-center gap-2 text-navy-deep font-extrabold text-base sm:text-lg rounded-xl px-7 py-4 w-full sm:w-auto">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
+        </svg>
+        Quiero proteger la fe de mi hijo
+      </a>
+
+      <p class="mt-4 text-sm text-white/65 flex items-center justify-center lg:justify-start gap-2">
+        <svg class="w-4 h-4 text-gold" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z"/>
+        </svg>
+        Acceso inmediato · Garantía de 7 días
+      </p>
+    </div>
+
+    <!-- RIGHT — hero mockup -->
+    <div class="order-1 lg:order-2 flex justify-center">
+      <!-- INSERIR: mockup-kit-principal.png -->
+      <picture>
+        <source srcset="assets/mockup-kit-principal.webp" type="image/webp">
+        <img src="assets/mockup-kit-principal.png"
+           alt="Kit digital completo Raíces de Fe — libro, guías, tablet y celular"
+           class="floaty w-full max-w-[460px] lg:max-w-[560px] drop-shadow-2xl"
+           width="1536" height="1024"
+           loading="eager" fetchpriority="high">
+    </div>
+  </div>
+
+  <!-- bottom wave -->
+  <div class="h-10 sm:h-14 bg-white" style="border-top-left-radius:50% 100%;border-top-right-radius:50% 100%;"></div>
+</section>
+
+<!-- ================= DOBRA 2 — PRUEBA SOCIAL ================= -->
+<section class="bg-white">
+  <div class="max-w-5xl mx-auto px-5 sm:px-6 pb-14 sm:pb-16 -mt-2">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 text-center divide-y sm:divide-y-0 sm:divide-x divide-navy/10">
+      <div class="pt-4 sm:pt-0 sm:px-4">
+        <div class="font-serif font-extrabold text-4xl sm:text-5xl text-navy">52</div>
+        <div class="mt-1 font-semibold text-ink">Sesiones</div>
+        <div class="text-sm text-ink/55">Un año de formación</div>
+      </div>
+      <div class="pt-4 sm:pt-0 sm:px-4">
+        <div class="font-serif font-extrabold text-4xl sm:text-5xl text-navy">+3.000</div>
+        <div class="mt-1 font-semibold text-ink">Familias</div>
+        <div class="text-sm text-ink/55">Ya fortalecidas</div>
+      </div>
+      <div class="pt-4 sm:pt-0 sm:px-4">
+        <div class="font-serif font-extrabold text-4xl sm:text-5xl text-navy">7</div>
+        <div class="mt-1 font-semibold text-ink">Días</div>
+        <div class="text-sm text-ink/55">De garantía total</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DOBRA 3 — PREVIEW DEL PRODUCTO (CARRUSEL) ================= -->
+<section class="bg-mist">
+  <div class="max-w-5xl mx-auto px-5 sm:px-6 py-16 sm:py-20">
+    <h2 class="font-serif font-extrabold text-3xl sm:text-4xl text-center text-navy mb-3">
+      Vea lo que hay dentro del programa:
+    </h2>
+    <p class="text-center text-ink/60 text-base sm:text-lg max-w-2xl mx-auto mb-3 text-balance">
+      52 semanas de formación, cada lección diseñada para que tu hijo descubra la fe por sí mismo.
+    </p>
+    <div class="w-16 h-1 bg-gold rounded-full mx-auto mb-12"></div>
+
+    <div id="pvCarousel" class="relative max-w-[420px] mx-auto">
+      <div id="pvViewport" class="relative mx-auto" style="aspect-ratio:1024/1536;">
+        <picture>
+        <source srcset="assets/preview-semana-01.webp" type="image/webp">
+        <img src="assets/preview-semana-01.png" alt="Semana 1 — El Comienzo de Todo"
+             class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
+             style="opacity:1;" loading="lazy" width="1024" height="1536">
+        <picture>
+        <source srcset="assets/preview-semana-07.webp" type="image/webp">
+        <img src="assets/preview-semana-07.png" alt="Semana 7 — Para Conversar en Familia"
+             class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
+             style="opacity:0;" loading="lazy" width="1024" height="1536">
+        <picture>
+        <source srcset="assets/preview-semana-29.webp" type="image/webp">
+        <img src="assets/preview-semana-29.png" alt="Semana 29 — Fe y Ciencia"
+             class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
+             style="opacity:0;" loading="lazy" width="1024" height="1535">
+        <picture>
+        <source srcset="assets/preview-semana-38.webp" type="image/webp">
+        <img src="assets/preview-semana-38.png" alt="Semana 38 — Cuando Alguien Cuestiona Tu Fe"
+             class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
+             style="opacity:0;" loading="lazy" width="1024" height="1535">
+        <picture>
+        <source srcset="assets/preview-semana-52.webp" type="image/webp">
+        <img src="assets/preview-semana-52.png" alt="Semana 52 — Una Fe Que Te Pertenece"
+             class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
+             style="opacity:0;" loading="lazy" width="1024" height="1535">
+      </div>
+
+      <button type="button" id="pvPrev" aria-label="Anterior"
+        class="absolute left-1 sm:-left-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-navy text-white flex items-center justify-center shadow-lg hover:bg-gold transition-colors">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 5-7 7 7 7"/>
+      </picture>
+      </picture>
+      </picture>
+      </picture>
+      </picture>
+      </picture></svg>
+      </button>
+      <button type="button" id="pvNext" aria-label="Siguiente"
+        class="absolute right-1 sm:-right-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-navy text-white flex items-center justify-center shadow-lg hover:bg-gold transition-colors">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 5 7 7-7 7"/></svg>
+      </button>
+
+      <div id="pvDots" class="flex justify-center gap-2.5 mt-7"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DOBRA 3.5 — CÓMO APLICAR EL MÉTODO ================= -->
+<section class="bg-white">
+  <div class="max-w-6xl mx-auto px-5 sm:px-6 py-16 sm:py-20">
+    <h2 class="font-serif font-extrabold text-3xl sm:text-4xl text-center text-navy mb-3 text-balance">
+      Cómo Aplicar el Método en el Día a Día de Tu Hijo
+    </h2>
+    <p class="text-center text-ink/60 text-lg mb-3">Simple, práctico y directo al punto.</p>
+    <div class="w-16 h-1 bg-gold rounded-full mx-auto mb-12"></div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-mist rounded-2xl p-6 ring-1 ring-navy/5 flex flex-col items-center text-center">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-4" style="background:#FBEFD2;">📚</div>
+        <span class="inline-block bg-navy text-white text-[11px] font-bold tracking-[0.15em] uppercase rounded-full px-3.5 py-1 mb-3">Paso 01</span>
+        <h3 class="font-serif font-bold text-lg text-ink mb-2">Estudio Guiado</h3>
+        <p class="text-sm text-ink/65 leading-relaxed">Tu hijo aprende a su ritmo, con lecciones cortas y objetivas, sin presión.</p>
+      </div>
+
+      <div class="bg-mist rounded-2xl p-6 ring-1 ring-navy/5 flex flex-col items-center text-center">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-4" style="background:#D9E4FB;">👨‍👩‍👧</div>
+        <span class="inline-block bg-navy text-white text-[11px] font-bold tracking-[0.15em] uppercase rounded-full px-3.5 py-1 mb-3">Paso 02</span>
+        <h3 class="font-serif font-bold text-lg text-ink mb-2">Conversaciones Naturales</h3>
+        <p class="text-sm text-ink/65 leading-relaxed">Las preguntas del material generan diálogos profundos en familia, sin que parezca un sermón.</p>
+      </div>
+
+      <div class="bg-mist rounded-2xl p-6 ring-1 ring-navy/5 flex flex-col items-center text-center">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-4" style="background:#FBF1C9;">💡</div>
+        <span class="inline-block bg-navy text-white text-[11px] font-bold tracking-[0.15em] uppercase rounded-full px-3.5 py-1 mb-3">Paso 03</span>
+        <h3 class="font-serif font-bold text-lg text-ink mb-2">Pensamiento Crítico Cristiano</h3>
+        <p class="text-sm text-ink/65 leading-relaxed">Él aprende a evaluar ideas, dudas y cuestionamientos, con la fe como base.</p>
+      </div>
+
+      <div class="bg-mist rounded-2xl p-6 ring-1 ring-navy/5 flex flex-col items-center text-center">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-4" style="background:#D6EFDD;">🙌</div>
+        <span class="inline-block bg-navy text-white text-[11px] font-bold tracking-[0.15em] uppercase rounded-full px-3.5 py-1 mb-3">Paso 04</span>
+        <h3 class="font-serif font-bold text-lg text-ink mb-2">Fe Aplicada a la Vida Real</h3>
+        <p class="text-sm text-ink/65 leading-relaxed">La fe deja de ser algo abstracto y empieza a tener sentido en su día a día.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DOBRA 4 — PARA QUIÉN ES ================= -->
+<section class="bg-white">
+  <div class="max-w-3xl mx-auto px-5 sm:px-6 py-16 sm:py-20">
+    <h2 class="font-serif font-extrabold text-3xl sm:text-4xl text-center text-navy mb-3">
+      Este material es para ti si deseas que tu hijo:
+    </h2>
+    <div class="w-16 h-1 bg-gold rounded-full mx-auto mb-12"></div>
+
+    <ul class="space-y-5">
+      <li class="flex gap-4 items-start">
+        <span class="shrink-0 mt-0.5 w-7 h-7 rounded-full bg-navy text-white flex items-center justify-center">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+        </span>
+        <p class="text-lg text-ink/80 leading-relaxed">Pueda <strong class="text-ink">explicar en qué cree — y por qué —</strong> sin trabarse ni dudar.</p>
+      </li>
+      <li class="flex gap-4 items-start">
+        <span class="shrink-0 mt-0.5 w-7 h-7 rounded-full bg-navy text-white flex items-center justify-center">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+        </span>
+        <p class="text-lg text-ink/80 leading-relaxed">No pierda su fe al primer año de universidad o cuando un amigo lo cuestione.</p>
+      </li>
+      <li class="flex gap-4 items-start">
+        <span class="shrink-0 mt-0.5 w-7 h-7 rounded-full bg-navy text-white flex items-center justify-center">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+        </span>
+        <p class="text-lg text-ink/80 leading-relaxed">Tenga conversaciones profundas contigo sobre Dios, sin que se sienta un sermón.</p>
+      </li>
+      <li class="flex gap-4 items-start">
+        <span class="shrink-0 mt-0.5 w-7 h-7 rounded-full bg-navy text-white flex items-center justify-center">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+        </span>
+        <p class="text-lg text-ink/80 leading-relaxed">Aprenda a <strong class="text-ink">pensar su fe</strong>, no solo a repetirla.</p>
+      </li>
+      <li class="flex gap-4 items-start">
+        <span class="shrink-0 mt-0.5 w-7 h-7 rounded-full bg-navy text-white flex items-center justify-center">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+        </span>
+        <p class="text-lg text-ink/80 leading-relaxed">Crezca con <strong class="text-ink">raíces tan profundas</strong> que el mundo no lo mueva.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= DOBRA 4.5 — 3 BONOS EXCLUSIVOS ================= -->
+<section class="bg-mist">
+  <div class="max-w-6xl mx-auto px-5 sm:px-6 py-16 sm:py-20">
+    <p class="text-center text-ink/60 text-lg mb-4">También vas a recibir</p>
+    <div class="flex justify-center mb-5">
+      <span class="bg-navy text-white font-extrabold tracking-wide rounded-full px-6 py-2.5 text-base sm:text-lg inline-flex items-center gap-2 shadow-lg">
+        <span>🎁</span> 3 BONOS EXCLUSIVOS
+      </span>
+    </div>
+    <div class="w-16 h-1 bg-gold rounded-full mx-auto mb-12"></div>
+
+    <div class="flex flex-wrap justify-center gap-6">
+      <!-- Bono 1 -->
+      <article class="bg-white rounded-2xl shadow-lg ring-1 ring-navy/5 p-6 flex flex-col w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+        <!-- INSERIR: mockup-bono1-guia-para-padres.png -->
+        <div class="flex justify-center mb-6">
+          <picture>
+        <source srcset="assets/mockup-bono1-guia-para-padres.webp" type="image/webp">
+        <img src="assets/mockup-bono1-guia-para-padres.png" alt="Guía para Padres"
+               class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy" width="1024" height="1536">
+        </div>
+        <h3 class="font-serif font-bold text-lg text-ink mb-3 leading-snug">
+          <span>🎁</span> <span class="text-navy">Bono #1</span> — Guía para Padres
+        </h3>
+        <p class="text-sm text-ink/65 leading-relaxed flex-1 mb-5">
+          Cómo responder las preguntas difíciles de tus hijos sobre fe sin pánico, sin respuestas improvisadas y sin conflictos, transformando las dudas en conversaciones profundas dentro de casa.
+        </p>
+        <div class="mt-auto bg-navy rounded-xl py-3.5 px-4 text-center text-sm font-semibold flex items-center justify-center gap-2.5">
+          <span class="text-white/70 font-normal">Valor: <span class="line-through">$47.00</span></span>
+          <span class="text-gold-2 font-extrabold tracking-widest">GRATIS</span>
+        </div>
+      </article>
+
+      <!-- Bono 2 -->
+      <article class="bg-white rounded-2xl shadow-lg ring-1 ring-navy/5 p-6 flex flex-col w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+        <!-- INSERIR: mockup-bono2-manual-errores.png -->
+        <div class="flex justify-center mb-6">
+          <picture>
+        <source srcset="assets/mockup-bono2-manual-errores.webp" type="image/webp">
+        <img src="assets/mockup-bono2-manual-errores.png" alt="Manual de Errores Comunes"
+               class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy" width="1024" height="1536">
+        </div>
+        <h3 class="font-serif font-bold text-lg text-ink mb-3 leading-snug">
+          <span>🎁</span> <span class="text-navy">Bono #2</span> — Manual de Errores Comunes
+        </h3>
+        <p class="text-sm text-ink/65 leading-relaxed flex-1 mb-5">
+          Un material directo que muestra actitudes comunes que los padres cometemos sin darnos cuenta, y que alejan a los hijos de la fe. Incluye cómo corregirlas para proteger el desarrollo espiritual de tu hijo.
+        </p>
+        <div class="mt-auto bg-navy rounded-xl py-3.5 px-4 text-center text-sm font-semibold flex items-center justify-center gap-2.5">
+          <span class="text-white/70 font-normal">Valor: <span class="line-through">$47.00</span></span>
+          <span class="text-gold-2 font-extrabold tracking-widest">GRATIS</span>
+        </div>
+      </article>
+
+      <!-- Bono 3 -->
+      <article class="bg-white rounded-2xl shadow-lg ring-1 ring-navy/5 p-6 flex flex-col w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+        <!-- INSERIR: mockup-bono3-guia-salvacion.png -->
+        <div class="flex justify-center mb-6">
+          <picture>
+        <source srcset="assets/mockup-bono3-guia-salvacion.webp" type="image/webp">
+        <img src="assets/mockup-bono3-guia-salvacion.png" alt="Guía de Salvación"
+               class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy" width="1024" height="1536">
+        </div>
+        <h3 class="font-serif font-bold text-lg text-ink mb-3 leading-snug">
+          <span>🎁</span> <span class="text-navy">Bono #3</span> — Guía de Salvación
+        </h3>
+        <p class="text-sm text-ink/65 leading-relaxed flex-1 mb-5">
+          Una guía estratégica para que los padres entiendan cómo acompañar a sus hijos en cada etapa espiritual, de los 8 a los 18 años, sin control excesivo, sin miedo y sin presión.
+        </p>
+        <div class="mt-auto bg-navy rounded-xl py-3.5 px-4 text-center text-sm font-semibold flex items-center justify-center gap-2.5">
+          <span class="text-white/70 font-normal">Valor: <span class="line-through">$47.00</span></span>
+          <span class="text-gold-2 font-extrabold tracking-widest">GRATIS</span>
+        </div>
+      </article>
+    </div>
+
+    <p class="text-center text-navy font-bold text-lg sm:text-2xl mt-12">
+      Todo incluido en tu acceso por <span class="text-gold-dk">$12.90 USD</span>
+    </p>
+  </div>
+</section>
+
+<!-- ================= DOBRA 8 — CTA FINAL (PLAN COMPLETO) ================= -->
+<!-- META PIXEL: InitiateCheckout — disparado ao clicar no botão -->
+<section id="oferta" class="relative overflow-hidden bg-gradient-to-b from-navy via-navy-deep to-navy-deep">
+  <div class="absolute inset-0 opacity-[0.06] pointer-events-none"
+       style="background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:24px 24px;"></div>
+
+  <div class="relative max-w-[480px] mx-auto px-4 sm:px-5 py-16 sm:py-20">
+    <div class="relative pt-7">
+      <!-- badge topo flotante -->
+      <div class="absolute left-1/2 -translate-x-1/2 top-0 z-20">
+        <span class="inline-flex items-center gap-2 text-navy-deep font-extrabold text-sm sm:text-base tracking-wider uppercase rounded-full px-6 py-2.5 whitespace-nowrap ring-2 ring-white shadow-[0_10px_24px_-6px_rgba(176,144,47,.75)]"
+              style="background:linear-gradient(180deg,#EAD891 0%,#C9A84C 58%,#B0902F 100%);">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/>
+      </picture>
+      </picture>
+      </picture>
+          </svg>
+          Más completo
+        </span>
+      </div>
+
+      <!-- card -->
+      <div class="bg-white rounded-3xl shadow-2xl ring-1 ring-black/5 overflow-hidden">
+        <!-- faja urgencia -->
+        <div class="bg-navy text-white text-center text-xs sm:text-sm font-semibold tracking-wide px-5 pt-11 pb-4">
+          <span class="text-gold-2">⚡</span> PRECIO DE LANZAMIENTO
+          <span class="text-white/75 font-normal">· Solo por tiempo limitado</span>
+        </div>
+
+        <div class="px-6 sm:px-8 py-8">
+          <p class="text-center font-semibold text-[#15803D] text-sm mb-1.5">Todo incluido en un solo acceso</p>
+          <h2 class="text-center font-serif font-extrabold text-navy leading-tight mb-6">
+            <span class="block text-3xl sm:text-4xl">Raíces de Fe</span>
+            <span class="block text-xl sm:text-2xl text-navy/80">El Programa Completo</span>
+          </h2>
+
+          <!-- INSERIR: mockup-kit-principal.png -->
+          <img src="assets/mockup-kit-principal.png" alt="Kit completo Raíces de Fe"
+               class="w-full max-w-[300px] mx-auto mb-5 drop-shadow-xl" loading="lazy" width="1536" height="1024">
+
+          <div class="flex justify-center mb-7">
+            <span class="inline-flex items-center gap-1.5 border border-gold rounded-full text-gold-dk font-semibold text-xs sm:text-sm px-4 py-1.5 bg-gold/5">
+              <span>⚡</span> Acceso inmediato a todo el contenido
+            </span>
+          </div>
+
+          <!-- lista de items -->
+          <ul class="divide-y divide-gray-200 border-y border-gray-200 mb-7">
+            <li class="flex gap-3 py-4">
+              <span class="shrink-0 mt-0.5 w-6 h-6 rounded-full bg-[#15803D] text-white flex items-center justify-center">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+              </span>
+              <div>
+                <p class="font-bold text-ink leading-snug">Raíces de Fe — 52 semanas de formación</p>
+                <p class="text-sm text-ink/60">En fe para niños de 8 a 14 años.</p>
+              </div>
+            </li>
+            <li class="flex gap-3 py-4">
+              <span class="shrink-0 mt-0.5 w-6 h-6 rounded-full bg-gold/15 text-gold-dk flex items-center justify-center">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+                  <path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7S11 2.5 8 2.5A2.5 2.5 0 0 0 8 7M12 7s1-4.5 4-4.5A2.5 2.5 0 0 1 16 7"/>
+                </svg>
+              </span>
+              <div>
+                <p class="font-bold text-ink leading-snug">Bono #1 — Guía para Padres</p>
+                <p class="text-sm text-ink/60">Cómo responder las preguntas difíciles con seguridad.</p>
+              </div>
+            </li>
+            <li class="flex gap-3 py-4">
+              <span class="shrink-0 mt-0.5 w-6 h-6 rounded-full bg-gold/15 text-gold-dk flex items-center justify-center">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+                  <path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7S11 2.5 8 2.5A2.5 2.5 0 0 0 8 7M12 7s1-4.5 4-4.5A2.5 2.5 0 0 1 16 7"/>
+                </svg>
+              </span>
+              <div>
+                <p class="font-bold text-ink leading-snug">Bono #2 — Manual de Errores Comunes</p>
+                <p class="text-sm text-ink/60">Lo que hacemos sin querer que aleja a los hijos de la fe.</p>
+              </div>
+            </li>
+            <li class="flex gap-3 py-4">
+              <span class="shrink-0 mt-0.5 w-6 h-6 rounded-full bg-gold/15 text-gold-dk flex items-center justify-center">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+                  <path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7S11 2.5 8 2.5A2.5 2.5 0 0 0 8 7M12 7s1-4.5 4-4.5A2.5 2.5 0 0 1 16 7"/>
+                </svg>
+              </span>
+              <div>
+                <p class="font-bold text-ink leading-snug">Bono #3 — Guía de Salvación</p>
+                <p class="text-sm text-ink/60">Cómo acompañar a tu hijo en cada etapa espiritual.</p>
+              </div>
+            </li>
+          </ul>
+
+          <!-- preço -->
+          <div class="text-center mb-7">
+            <p class="text-gray-400 line-through text-sm">Valor normal: $47.00 USD</p>
+            <p class="text-[#15803D] text-sm font-medium mt-2">Hoy pagas solo:</p>
+            <p class="font-serif font-extrabold text-[#15803D] text-5xl leading-none my-1">
+              $12.90 <span class="text-xl align-top">USD</span>
+            </p>
+            <p class="text-gray-400 text-xs">Pago único · Acceso de por vida</p>
+            <p class="inline-block mt-3 text-[#15803D] font-bold text-sm bg-[#15803D]/10 rounded-full px-3 py-1">
+              • Ahorras $37.10 USD
+            </p>
+          </div>
+
+          <!-- META PIXEL: InitiateCheckout -->
+          <!-- TODO: reemplazar YOUR_HOTMART_CHECKOUT_LINK por el link real del producto configurado -->
+          <a href="https://pay.hotmart.com/W106183773L?off=ffeyoqr3&checkoutMode=10"
+             data-cta="final"
+             onclick="rfTrackIC(this)"
+             class="cta-green flex items-center justify-center gap-2.5 text-white font-extrabold text-base sm:text-lg rounded-xl px-5 w-full text-center"
+             style="text-shadow:0 1px 2px rgba(0,0,0,.28); padding-top:1.05rem; padding-bottom:1.05rem;">
+            <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
+            </svg>
+            SÍ, QUIERO RAÍCES DE FE
+          </a>
+
+          <p class="text-center mt-4 text-ink/55 text-xs sm:text-sm">
+            Acceso inmediato · Garantía de 7 días · Pago 100% seguro
+          </p>
+
+          <!-- payment icons -->
+          <div class="mt-5 flex items-center justify-center gap-2.5 flex-wrap">
+            <span class="bg-[#F04E23] text-white rounded-md px-2.5 py-1.5 text-[11px] font-bold shadow-sm tracking-tight">hotmart</span>
+            <span class="bg-gray-50 ring-1 ring-gray-200 rounded-md px-2.5 py-1.5 text-[11px] font-bold text-[#1A1F71] shadow-sm tracking-tight">VISA</span>
+            <span class="bg-gray-50 ring-1 ring-gray-200 rounded-md px-2.5 py-1.5 shadow-sm flex items-center gap-1">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#EB001B] inline-block"></span>
+              <span class="w-3.5 h-3.5 rounded-full bg-[#F79E1B] inline-block -ml-1.5"></span>
+            </span>
+            <span class="bg-gray-50 ring-1 ring-gray-200 rounded-md px-2.5 py-1.5 text-[11px] font-bold shadow-sm">
+              <span class="text-[#003087]">Pay</span><span class="text-[#009cde]">Pal</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DOBRA 7 — GARANTÍA ================= -->
+<section class="bg-navy text-white">
+  <div class="max-w-2xl mx-auto px-5 sm:px-6 py-16 sm:py-20 text-center">
+    <!-- INSERIR: selo-garantia-7dias.png -->
+    <picture>
+        <source srcset="assets/selo-garantia-7dias.webp" type="image/webp">
+        <img src="assets/selo-garantia-7dias.png"
+         alt="Sello de garantía 7 días — 100% de tu dinero de vuelta, sin preguntas"
+         class="mx-auto mb-8 w-44 h-44 sm:w-52 sm:h-52 object-contain drop-shadow-2xl" loading="lazy" width="1024" height="1024">
+
+    <h2 class="font-serif font-extrabold text-3xl sm:text-4xl mb-5">Garantía de 7 días — sin preguntas</h2>
+    <p class="text-lg text-white/80 leading-relaxed max-w-xl mx-auto">
+      Si en los próximos 7 días sientes que este material no fue lo que esperabas, te devolvemos el
+      <strong class="text-gold-2">100% de tu dinero</strong>. Sin formularios, sin demoras, sin preguntas.
+      El riesgo es completamente nuestro.
+    </p>
+  </div>
+</section>
+
+<!-- ================= DOBRA 5 — TESTIMONIOS (CARRUSEL) ================= -->
+<section class="bg-mist">
+  <div class="max-w-6xl mx-auto px-5 sm:px-6 py-16 sm:py-20">
+    <h2 class="font-serif font-extrabold text-3xl sm:text-4xl text-center text-navy mb-3">
+      Lo que dicen familias que ya lo usan:
+    </h2>
+    <div class="w-16 h-1 bg-gold rounded-full mx-auto mb-12"></div>
+
+    <div class="relative" id="tCarousel">
+      <button type="button" id="tPrev" aria-label="Anterior"
+        class="absolute left-0 sm:-left-1 top-[calc(50%-1.25rem)] -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-navy text-white flex items-center justify-center shadow-lg hover:bg-gold transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 5-7 7 7 7"/>
+      </picture></svg>
+      </button>
+      <button type="button" id="tNext" aria-label="Siguiente"
+        class="absolute right-0 sm:-right-1 top-[calc(50%-1.25rem)] -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-navy text-white flex items-center justify-center shadow-lg hover:bg-gold transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 5 7 7-7 7"/></svg>
+      </button>
+
+      <div class="overflow-hidden mx-12 sm:mx-14">
+        <div class="flex gap-6 transition-transform duration-500 ease-out items-stretch" id="tTrack">
+
+          <figure class="t-card shrink-0 bg-white rounded-2xl p-7 shadow-sm ring-1 ring-navy/5 flex flex-col">
+            <div class="flex gap-0.5 text-gold mb-4" aria-label="5 de 5 estrellas">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+            </div>
+            <blockquote class="text-ink/75 leading-relaxed flex-1">"Mi hijo de 11 años siempre me hacía preguntas que yo no sabía responder. Con este material aprendí a hablar con él de una manera que tiene sentido para su edad. Ahora él es quien le explica la fe a sus primos."</blockquote>
+            <figcaption class="mt-5 pt-4 border-t border-navy/10 font-semibold text-navy">Valeria R. <span class="block text-sm font-normal text-ink/55">Mamá de 3 hijos · Guadalajara, México</span></figcaption>
+          </figure>
+
+          <figure class="t-card shrink-0 bg-white rounded-2xl p-7 shadow-sm ring-1 ring-navy/5 flex flex-col">
+            <div class="flex gap-0.5 text-gold mb-4" aria-label="5 de 5 estrellas">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+            </div>
+            <blockquote class="text-ink/75 leading-relaxed flex-1">"Lo compré pensando que era otro devocional. No lo es. Mi hija de 13 años empezó a hacer preguntas reales, y yo por fin tenía respuestas reales para darle."</blockquote>
+            <figcaption class="mt-5 pt-4 border-t border-navy/10 font-semibold text-navy">Carolina M. <span class="block text-sm font-normal text-ink/55">Mamá · Medellín, Colombia</span></figcaption>
+          </figure>
+
+          <figure class="t-card shrink-0 bg-white rounded-2xl p-7 shadow-sm ring-1 ring-navy/5 flex flex-col">
+            <div class="flex gap-0.5 text-gold mb-4" aria-label="5 de 5 estrellas">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+            </div>
+            <blockquote class="text-ink/75 leading-relaxed flex-1">"Mi esposo es pastor y pensamos que ya sabíamos todo sobre enseñar la fe en casa. Este método nos mostró que habíamos estado enseñando versículos sin enseñar el porqué."</blockquote>
+            <figcaption class="mt-5 pt-4 border-t border-navy/10 font-semibold text-navy">Sofía T. <span class="block text-sm font-normal text-ink/55">Familia pastoral · Monterrey, México</span></figcaption>
+          </figure>
+
+          <figure class="t-card shrink-0 bg-white rounded-2xl p-7 shadow-sm ring-1 ring-navy/5 flex flex-col">
+            <div class="flex gap-0.5 text-gold mb-4" aria-label="5 de 5 estrellas">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+            </div>
+            <blockquote class="text-ink/75 leading-relaxed flex-1">"Llevaba años orando para que mis hijos no se alejaran de Dios cuando crecieran. Con Raíces de Fe encontré algo concreto que hacer. Mi hijo de 9 años ahora me hace preguntas que yo nunca me había hecho."</blockquote>
+            <figcaption class="mt-5 pt-4 border-t border-navy/10 font-semibold text-navy">Marcela G. <span class="block text-sm font-normal text-ink/55">Mamá de 2 hijos · Bogotá, Colombia</span></figcaption>
+          </figure>
+
+          <figure class="t-card shrink-0 bg-white rounded-2xl p-7 shadow-sm ring-1 ring-navy/5 flex flex-col">
+            <div class="flex gap-0.5 text-gold mb-4" aria-label="5 de 5 estrellas">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+            </div>
+            <blockquote class="text-ink/75 leading-relaxed flex-1">"Mi hija de 12 años llegó de la escuela diciéndome que la ciencia prueba que Dios no existe. Antes no hubiera sabido qué responderle. Ahora los dos sabemos. Este material cambió nuestras conversaciones para siempre."</blockquote>
+            <figcaption class="mt-5 pt-4 border-t border-navy/10 font-semibold text-navy">Roberto A. <span class="block text-sm font-normal text-ink/55">Papá · Ciudad de México, México</span></figcaption>
+          </figure>
+
+          <figure class="t-card shrink-0 bg-white rounded-2xl p-7 shadow-sm ring-1 ring-navy/5 flex flex-col">
+            <div class="flex gap-0.5 text-gold mb-4" aria-label="5 de 5 estrellas">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/></svg>
+            </div>
+            <blockquote class="text-ink/75 leading-relaxed flex-1">"Lo que más me sorprendió fue ver a mi hijo de 10 años explicarle a su abuela católica por qué creemos lo que creemos — con respeto y con seguridad. Eso no tiene precio."</blockquote>
+            <figcaption class="mt-5 pt-4 border-t border-navy/10 font-semibold text-navy">Patricia L. <span class="block text-sm font-normal text-ink/55">Mamá · Santiago, Chile</span></figcaption>
+          </figure>
+
+        </div>
+      </div>
+
+      <div id="tDots" class="flex justify-center gap-2.5 mt-8"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DOBRA 6 — FAQ ================= -->
+<section class="bg-white">
+  <div class="max-w-3xl mx-auto px-5 sm:px-6 py-16 sm:py-20">
+    <h2 class="font-serif font-extrabold text-3xl sm:text-4xl text-center text-navy mb-3">
+      Preguntas frecuentes
+    </h2>
+    <div class="w-16 h-1 bg-gold rounded-full mx-auto mb-12"></div>
+
+    <div class="space-y-4" id="faq">
+      <div class="acc-item rounded-2xl ring-1 ring-navy/10 bg-mist/60 overflow-hidden" data-open="false">
+        <button type="button" class="acc-trigger w-full flex items-center justify-between gap-4 text-left px-6 py-5">
+          <span class="font-serif font-bold text-lg text-navy">¿Necesito ser teólogo para usar este material?</span>
+          <span class="acc-chev shrink-0 w-7 h-7 rounded-full bg-navy text-white flex items-center justify-center text-xl leading-none">+</span>
+        </button>
+        <div class="acc-panel">
+          <p class="px-6 pb-6 text-ink/70 leading-relaxed">Para nada. Está diseñado para padres normales, no para pastores ni académicos. Cada sesión viene explicada en lenguaje simple, paso a paso.</p>
+        </div>
+      </div>
+
+      <div class="acc-item rounded-2xl ring-1 ring-navy/10 bg-mist/60 overflow-hidden" data-open="false">
+        <button type="button" class="acc-trigger w-full flex items-center justify-between gap-4 text-left px-6 py-5">
+          <span class="font-serif font-bold text-lg text-navy">¿Funciona para niños pequeños o solo adolescentes?</span>
+          <span class="acc-chev shrink-0 w-7 h-7 rounded-full bg-navy text-white flex items-center justify-center text-xl leading-none">+</span>
+        </button>
+        <div class="acc-panel">
+          <p class="px-6 pb-6 text-ink/70 leading-relaxed">El material está pensado para niños de 8 a 14 años, la edad donde más se forman las preguntas sobre fe. Hay orientaciones específicas para cada etapa.</p>
+        </div>
+      </div>
+
+      <div class="acc-item rounded-2xl ring-1 ring-navy/10 bg-mist/60 overflow-hidden" data-open="false">
+        <button type="button" class="acc-trigger w-full flex items-center justify-between gap-4 text-left px-6 py-5">
+          <span class="font-serif font-bold text-lg text-navy">¿Cuánto tiempo requiere por semana?</span>
+          <span class="acc-chev shrink-0 w-7 h-7 rounded-full bg-navy text-white flex items-center justify-center text-xl leading-none">+</span>
+        </button>
+        <div class="acc-panel">
+          <p class="px-6 pb-6 text-ink/70 leading-relaxed">Una sesión de 20 a 30 minutos. Puedes hacerlo un día a la semana, noche del viernes, domingo por la tarde, lo que funcione para tu familia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-navy-deep text-white/60">
+  <div class="max-w-3xl mx-auto px-5 sm:px-6 py-10 text-center space-y-2 text-sm">
+    <p class="text-white/80 font-semibold">© 2026 Raíces de Fe · Todos los derechos reservados</p>
+    <p>Este producto es 100% digital. Recibirás acceso inmediato tras la compra.</p>
+    <p>
+      <a href="#" class="hover:text-gold underline-offset-2 hover:underline">Política de privacidad</a> ·
+      <a href="#" class="hover:text-gold underline-offset-2 hover:underline">Términos de uso</a>
+    </p>
+  </div>
+</footer>
+
+<!-- ================= STICKY CTA MÓVIL ================= -->
+<div class="sm:hidden fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur border-t border-navy/10 px-4 py-3 flex items-center gap-3 shadow-[0_-6px_20px_-6px_rgba(0,0,0,.18)]">
+  <div class="leading-tight">
+    <div class="text-[11px] text-ink/50 line-through">$29.90</div>
+    <div class="font-serif font-extrabold text-navy text-xl">$12.90 <span class="text-xs font-sans font-semibold text-ink/50">USD</span></div>
+  </div>
+  <a href="https://pay.hotmart.com/W106183773L?off=ffeyoqr3&checkoutMode=10"
+     data-cta="sticky"
+     onclick="rfTrackIC(this)"
+     class="cta-gold flex-1 text-center text-navy-deep font-extrabold rounded-xl px-4 py-3.5 text-sm">
+    Quiero proteger su fe
+  </a>
+</div>
+
+<script>
+  /* ── ViewContent — event_id único para deduplicação ── */
+  (function () {
+    if (typeof fbq === 'undefined') return;
+    var vcId = window._rfEvId('rf_vc');
+    sessionStorage.setItem('rf_vc_id', vcId);
+    fbq('track', 'ViewContent', {
+      content_name:     'Raices de Fe',
+      content_type:     'product',
+      currency:         'USD',
+      value:            12.90
+    }, { eventID: vcId });
+  })();
+
+  /* ── InitiateCheckout — event_id único + injeção na URL do checkout ──
+     Passa o mesmo event_id para o Hotmart via parâmetro ?sck=
+     O n8n lê esse valor e usa como event_id no Purchase da API de Conversões
+     garantindo deduplicação browser ↔ servidor.                            */
+  window.rfTrackIC = function (el) {
+    var icId = window._rfEvId('rf_ic');
+    sessionStorage.setItem('rf_ic_id', icId);
+
+    // Injeta event_id na URL do checkout (se o elemento for um <a> com href real)
+    if (el && el.tagName === 'A' && el.href && el.href.indexOf('hotmart.com') > -1) {
+      try {
+        var url = new URL(el.href);
+        url.searchParams.set('sck', icId);   // Hotmart repassa 'sck' no webhook
+        el.href = url.toString();
+      } catch (e) {}
+    }
+
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'InitiateCheckout', {
+        value:    12.90,
+        currency: 'USD'
+      }, { eventID: icId });
+    }
+  };
+
+  /* ---- Accordion ---- */
+  document.querySelectorAll('.acc-item').forEach(function (item) {
+    item.querySelector('.acc-trigger').addEventListener('click', function () {
+      var isOpen = item.getAttribute('data-open') === 'true';
+      document.querySelectorAll('.acc-item').forEach(function (o) { o.setAttribute('data-open', 'false'); });
+      item.setAttribute('data-open', isOpen ? 'false' : 'true');
+    });
+  });
+
+  /* ---- Countdown (24h, persiste en localStorage) ---- */
+  (function () {
+    var el = document.getElementById('countdown');
+    if (!el) return;
+    var KEY = 'rdf_deadline';
+    var now = Date.now();
+    var deadline = parseInt(localStorage.getItem(KEY) || '0', 10);
+    if (!deadline || deadline < now) {
+      deadline = now + 24 * 60 * 60 * 1000;
+      localStorage.setItem(KEY, String(deadline));
+    }
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function tick() {
+      var diff = Math.max(0, deadline - Date.now());
+      var h = Math.floor(diff / 3.6e6);
+      var m = Math.floor((diff % 3.6e6) / 6e4);
+      var s = Math.floor((diff % 6e4) / 1000);
+      el.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  /* ---- Carrusel testimonios (vanilla JS, sin autoplay) ---- */
+  (function () {
+    var track = document.getElementById('tTrack');
+    if (!track) return;
+    var cards = Array.prototype.slice.call(track.children);
+    var prev = document.getElementById('tPrev');
+    var next = document.getElementById('tNext');
+    var dotsWrap = document.getElementById('tDots');
+    var GAP = 24;
+    var index = 0, perView = 3, maxIndex = 0;
+
+    function getPerView() { return window.matchMedia('(min-width: 768px)').matches ? 3 : 1; }
+    function cardWidth() {
+      var vp = track.parentElement.clientWidth;
+      return (vp - GAP * (perView - 1)) / perView;
+    }
+    function buildDots() {
+      dotsWrap.innerHTML = '';
+      for (var i = 0; i <= maxIndex; i++) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 't-dot';
+        b.setAttribute('aria-label', 'Ir al grupo ' + (i + 1));
+        (function (n) { b.addEventListener('click', function () { index = n; update(); }); })(i);
+        dotsWrap.appendChild(b);
+      }
+    }
+    function update() {
+      var w = cardWidth();
+      track.style.transform = 'translateX(' + (-index * (w + GAP)) + 'px)';
+      var dots = dotsWrap.children;
+      for (var i = 0; i < dots.length; i++) dots[i].setAttribute('data-active', i === index ? 'true' : 'false');
+      prev.disabled = index <= 0;
+      next.disabled = index >= maxIndex;
+    }
+    function layout() {
+      perView = getPerView();
+      maxIndex = Math.max(0, cards.length - perView);
+      if (index > maxIndex) index = maxIndex;
+      var w = cardWidth();
+      cards.forEach(function (c) { c.style.width = w + 'px'; });
+      buildDots();
+      update();
+    }
+    prev.addEventListener('click', function () { if (index > 0) { index--; update(); } });
+    next.addEventListener('click', function () { if (index < maxIndex) { index++; update(); } });
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(layout, 120); });
+    layout();
+  })();
+
+  /* ---- Carrusel preview del producto (crossfade, autoplay 4s) ---- */
+  (function () {
+    var car = document.getElementById('pvCarousel');
+    if (!car) return;
+    var slides = Array.prototype.slice.call(car.querySelectorAll('.pv-slide'));
+    var prev = document.getElementById('pvPrev');
+    var next = document.getElementById('pvNext');
+    var dotsWrap = document.getElementById('pvDots');
+    var i = 0, timer = null, DELAY = 4000;
+
+    slides.forEach(function (_, n) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 't-dot';
+      b.setAttribute('aria-label', 'Ver imagen ' + (n + 1));
+      b.addEventListener('click', function () { go(n); restart(); });
+      dotsWrap.appendChild(b);
+    });
+
+    function render() {
+      slides.forEach(function (s, n) {
+        s.style.opacity = n === i ? '1' : '0';
+        s.style.zIndex  = n === i ? '1' : '0';
+      });
+      var dots = dotsWrap.children;
+      for (var n = 0; n < dots.length; n++) dots[n].setAttribute('data-active', n === i ? 'true' : 'false');
+    }
+    function go(n) { i = (n + slides.length) % slides.length; render(); }
+    function start() { stop(); timer = setInterval(function () { go(i + 1); }, DELAY); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function restart() { start(); }
+
+    prev.addEventListener('click', function () { go(i - 1); restart(); });
+    next.addEventListener('click', function () { go(i + 1); restart(); });
+    car.addEventListener('mouseenter', stop);
+    car.addEventListener('mouseleave', start);
+
+    render();
+    start();
+  })();
+</script>
+
+</body>
+</html>
