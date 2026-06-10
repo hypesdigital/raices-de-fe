@@ -34,22 +34,19 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
-<!-- Resource hints — DNS/preconnect para domínios críticos -->
-<link rel="preconnect" href="https://connect.facebook.net">
-<link rel="dns-prefetch" href="https://connect.facebook.net">
-<link rel="preconnect" href="https://cdn.utmify.com.br" crossorigin>
-<link rel="dns-prefetch" href="https://cdn.utmify.com.br">
-<link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+<!-- Preconnect — apenas os necessários -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://connect.facebook.net">
+<link rel="dns-prefetch" href="https://connect.facebook.net">
 
-<!-- Preload: imagem hero (LCP) -->
-<link rel="preload" as="image" href="assets/mockup-kit-principal.png" fetchpriority="high">
+<!-- Preload LCP hero (WebP com fallback) -->
+<link rel="preload" as="image" href="assets/mockup-kit-principal.webp" fetchpriority="high" type="image/webp">
 
-<!-- Google Fonts — swap evita FOIT -->
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700;8..60,800&display=swap" rel="stylesheet">
 
-<!-- Tailwind CDN (JIT) — TODO: substituir por tailwind.css compilado após build Hostinger -->
+<!-- Tailwind CDN — MANTIDO NO HEAD (não mover) -->
 <script src="https://cdn.tailwindcss.com"></script>
 
 <script>
@@ -202,7 +199,9 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
     <!-- RIGHT — hero mockup -->
     <div class="order-1 lg:order-2 flex justify-center">
       <!-- INSERIR: mockup-kit-principal.png -->
-      <img src="assets/mockup-kit-principal.png"
+      <picture>
+        <source srcset="assets/mockup-kit-principal.webp" type="image/webp">
+        <img src="assets/mockup-kit-principal.png"
            alt="Kit digital completo Raíces de Fe — libro, guías, tablet y celular"
            class="floaty w-full max-w-[460px] lg:max-w-[560px] drop-shadow-2xl"
            width="1536" height="1024"
@@ -250,18 +249,28 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
 
     <div id="pvCarousel" class="relative max-w-[420px] mx-auto">
       <div id="pvViewport" class="relative mx-auto" style="aspect-ratio:1024/1536;">
+        <picture>
+        <source srcset="assets/preview-semana-01.webp" type="image/webp">
         <img src="assets/preview-semana-01.png" alt="Semana 1 — El Comienzo de Todo"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
              style="opacity:1;" loading="lazy" width="1024" height="1536">
+        <picture>
+        <source srcset="assets/preview-semana-07.webp" type="image/webp">
         <img src="assets/preview-semana-07.png" alt="Semana 7 — Para Conversar en Familia"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
              style="opacity:0;" loading="lazy" width="1024" height="1536">
+        <picture>
+        <source srcset="assets/preview-semana-29.webp" type="image/webp">
         <img src="assets/preview-semana-29.png" alt="Semana 29 — Fe y Ciencia"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
              style="opacity:0;" loading="lazy" width="1024" height="1535">
+        <picture>
+        <source srcset="assets/preview-semana-38.webp" type="image/webp">
         <img src="assets/preview-semana-38.png" alt="Semana 38 — Cuando Alguien Cuestiona Tu Fe"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
              style="opacity:0;" loading="lazy" width="1024" height="1535">
+        <picture>
+        <source srcset="assets/preview-semana-52.webp" type="image/webp">
         <img src="assets/preview-semana-52.png" alt="Semana 52 — Una Fe Que Te Pertenece"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
              style="opacity:0;" loading="lazy" width="1024" height="1535">
@@ -269,7 +278,13 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
 
       <button type="button" id="pvPrev" aria-label="Anterior"
         class="absolute left-1 sm:-left-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-navy text-white flex items-center justify-center shadow-lg hover:bg-gold transition-colors">
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 5-7 7 7 7"/></svg>
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 5-7 7 7 7"/>
+      </picture>
+      </picture>
+      </picture>
+      </picture>
+      </picture>
+      </picture></svg>
       </button>
       <button type="button" id="pvNext" aria-label="Siguiente"
         class="absolute right-1 sm:-right-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-navy text-white flex items-center justify-center shadow-lg hover:bg-gold transition-colors">
@@ -381,7 +396,9 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
       <article class="bg-white rounded-2xl shadow-lg ring-1 ring-navy/5 p-6 flex flex-col w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
         <!-- INSERIR: mockup-bono1-guia-para-padres.png -->
         <div class="flex justify-center mb-6">
-          <img src="assets/mockup-bono1-guia-para-padres.png" alt="Guía para Padres"
+          <picture>
+        <source srcset="assets/mockup-bono1-guia-para-padres.webp" type="image/webp">
+        <img src="assets/mockup-bono1-guia-para-padres.png" alt="Guía para Padres"
                class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy" width="1024" height="1536">
         </div>
         <h3 class="font-serif font-bold text-lg text-ink mb-3 leading-snug">
@@ -400,7 +417,9 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
       <article class="bg-white rounded-2xl shadow-lg ring-1 ring-navy/5 p-6 flex flex-col w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
         <!-- INSERIR: mockup-bono2-manual-errores.png -->
         <div class="flex justify-center mb-6">
-          <img src="assets/mockup-bono2-manual-errores.png" alt="Manual de Errores Comunes"
+          <picture>
+        <source srcset="assets/mockup-bono2-manual-errores.webp" type="image/webp">
+        <img src="assets/mockup-bono2-manual-errores.png" alt="Manual de Errores Comunes"
                class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy" width="1024" height="1536">
         </div>
         <h3 class="font-serif font-bold text-lg text-ink mb-3 leading-snug">
@@ -419,7 +438,9 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
       <article class="bg-white rounded-2xl shadow-lg ring-1 ring-navy/5 p-6 flex flex-col w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
         <!-- INSERIR: mockup-bono3-guia-salvacion.png -->
         <div class="flex justify-center mb-6">
-          <img src="assets/mockup-bono3-guia-salvacion.png" alt="Guía de Salvación"
+          <picture>
+        <source srcset="assets/mockup-bono3-guia-salvacion.webp" type="image/webp">
+        <img src="assets/mockup-bono3-guia-salvacion.png" alt="Guía de Salvación"
                class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy" width="1024" height="1536">
         </div>
         <h3 class="font-serif font-bold text-lg text-ink mb-3 leading-snug">
@@ -455,6 +476,9 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
               style="background:linear-gradient(180deg,#EAD891 0%,#C9A84C 58%,#B0902F 100%);">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
             <path d="m12 2 2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2Z"/>
+      </picture>
+      </picture>
+      </picture>
           </svg>
           Más completo
         </span>
@@ -583,7 +607,9 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
 <section class="bg-navy text-white">
   <div class="max-w-2xl mx-auto px-5 sm:px-6 py-16 sm:py-20 text-center">
     <!-- INSERIR: selo-garantia-7dias.png -->
-    <img src="assets/selo-garantia-7dias.png"
+    <picture>
+        <source srcset="assets/selo-garantia-7dias.webp" type="image/webp">
+        <img src="assets/selo-garantia-7dias.png"
          alt="Sello de garantía 7 días — 100% de tu dinero de vuelta, sin preguntas"
          class="mx-auto mb-8 w-44 h-44 sm:w-52 sm:h-52 object-contain drop-shadow-2xl" loading="lazy" width="1024" height="1024">
 
@@ -607,7 +633,8 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
     <div class="relative" id="tCarousel">
       <button type="button" id="tPrev" aria-label="Anterior"
         class="absolute left-0 sm:-left-1 top-[calc(50%-1.25rem)] -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-navy text-white flex items-center justify-center shadow-lg hover:bg-gold transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 5-7 7 7 7"/></svg>
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 5-7 7 7 7"/>
+      </picture></svg>
       </button>
       <button type="button" id="tNext" aria-label="Siguiente"
         class="absolute right-0 sm:-right-1 top-[calc(50%-1.25rem)] -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-navy text-white flex items-center justify-center shadow-lg hover:bg-gold transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
