@@ -34,10 +34,23 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- Resource hints — DNS/preconnect para domínios críticos -->
+<link rel="preconnect" href="https://connect.facebook.net">
+<link rel="dns-prefetch" href="https://connect.facebook.net">
+<link rel="preconnect" href="https://cdn.utmify.com.br" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.utmify.com.br">
+<link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Preload: imagem hero (LCP) -->
+<link rel="preload" as="image" href="assets/mockup-kit-principal.png" fetchpriority="high">
+
+<!-- Google Fonts — swap evita FOIT -->
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700;8..60,800&display=swap" rel="stylesheet">
+
+<!-- Tailwind CDN (JIT) — TODO: substituir por tailwind.css compilado após build Hostinger -->
+<script src="https://cdn.tailwindcss.com"></script>
 
 <script>
   tailwind.config = {
@@ -95,7 +108,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
   .hero-glow { background: radial-gradient(60% 55% at 70% 40%, rgba(201,168,76,.22), transparent 70%); }
 
   @keyframes floaty { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-10px) } }
-  .floaty { animation: floaty 6s ease-in-out infinite; }
+  .floaty { animation: floaty 6s ease-in-out infinite; will-change: transform; }
 
   /* Carrusel dots */
   .t-dot { width:10px; height:10px; border-radius:9999px; background:rgba(27,58,107,.25); transition:all .3s ease; }
@@ -192,6 +205,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
       <img src="assets/mockup-kit-principal.png"
            alt="Kit digital completo Raíces de Fe — libro, guías, tablet y celular"
            class="floaty w-full max-w-[460px] lg:max-w-[560px] drop-shadow-2xl"
+           width="1536" height="1024"
            loading="eager" fetchpriority="high">
     </div>
   </div>
@@ -238,19 +252,19 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
       <div id="pvViewport" class="relative mx-auto" style="aspect-ratio:1024/1536;">
         <img src="assets/preview-semana-01.png" alt="Semana 1 — El Comienzo de Todo"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
-             style="opacity:1;" loading="lazy">
+             style="opacity:1;" loading="lazy" width="1024" height="1536">
         <img src="assets/preview-semana-07.png" alt="Semana 7 — Para Conversar en Familia"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
-             style="opacity:0;" loading="lazy">
+             style="opacity:0;" loading="lazy" width="1024" height="1536">
         <img src="assets/preview-semana-29.png" alt="Semana 29 — Fe y Ciencia"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
-             style="opacity:0;" loading="lazy">
+             style="opacity:0;" loading="lazy" width="1024" height="1535">
         <img src="assets/preview-semana-38.png" alt="Semana 38 — Cuando Alguien Cuestiona Tu Fe"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
-             style="opacity:0;" loading="lazy">
+             style="opacity:0;" loading="lazy" width="1024" height="1535">
         <img src="assets/preview-semana-52.png" alt="Semana 52 — Una Fe Que Te Pertenece"
              class="pv-slide absolute inset-0 w-full h-full object-contain rounded-2xl drop-shadow-2xl transition-opacity duration-700"
-             style="opacity:0;" loading="lazy">
+             style="opacity:0;" loading="lazy" width="1024" height="1535">
       </div>
 
       <button type="button" id="pvPrev" aria-label="Anterior"
@@ -368,7 +382,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
         <!-- INSERIR: mockup-bono1-guia-para-padres.png -->
         <div class="flex justify-center mb-6">
           <img src="assets/mockup-bono1-guia-para-padres.png" alt="Guía para Padres"
-               class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy">
+               class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy" width="1024" height="1536">
         </div>
         <h3 class="font-serif font-bold text-lg text-ink mb-3 leading-snug">
           <span>🎁</span> <span class="text-navy">Bono #1</span> — Guía para Padres
@@ -387,7 +401,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
         <!-- INSERIR: mockup-bono2-manual-errores.png -->
         <div class="flex justify-center mb-6">
           <img src="assets/mockup-bono2-manual-errores.png" alt="Manual de Errores Comunes"
-               class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy">
+               class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy" width="1024" height="1536">
         </div>
         <h3 class="font-serif font-bold text-lg text-ink mb-3 leading-snug">
           <span>🎁</span> <span class="text-navy">Bono #2</span> — Manual de Errores Comunes
@@ -406,7 +420,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
         <!-- INSERIR: mockup-bono3-guia-salvacion.png -->
         <div class="flex justify-center mb-6">
           <img src="assets/mockup-bono3-guia-salvacion.png" alt="Guía de Salvación"
-               class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy">
+               class="h-56 w-auto object-contain drop-shadow-xl" loading="lazy" width="1024" height="1536">
         </div>
         <h3 class="font-serif font-bold text-lg text-ink mb-3 leading-snug">
           <span>🎁</span> <span class="text-navy">Bono #3</span> — Guía de Salvación
@@ -463,7 +477,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
 
           <!-- INSERIR: mockup-kit-principal.png -->
           <img src="assets/mockup-kit-principal.png" alt="Kit completo Raíces de Fe"
-               class="w-full max-w-[300px] mx-auto mb-5 drop-shadow-xl" loading="lazy">
+               class="w-full max-w-[300px] mx-auto mb-5 drop-shadow-xl" loading="lazy" width="1536" height="1024">
 
           <div class="flex justify-center mb-7">
             <span class="inline-flex items-center gap-1.5 border border-gold rounded-full text-gold-dk font-semibold text-xs sm:text-sm px-4 py-1.5 bg-gold/5">
@@ -571,7 +585,7 @@ src="https://www.facebook.com/tr?id=1380867890531576&ev=PageView&noscript=1"
     <!-- INSERIR: selo-garantia-7dias.png -->
     <img src="assets/selo-garantia-7dias.png"
          alt="Sello de garantía 7 días — 100% de tu dinero de vuelta, sin preguntas"
-         class="mx-auto mb-8 w-44 h-44 sm:w-52 sm:h-52 object-contain drop-shadow-2xl" loading="lazy">
+         class="mx-auto mb-8 w-44 h-44 sm:w-52 sm:h-52 object-contain drop-shadow-2xl" loading="lazy" width="1024" height="1024">
 
     <h2 class="font-serif font-extrabold text-3xl sm:text-4xl mb-5">Garantía de 7 días — sin preguntas</h2>
     <p class="text-lg text-white/80 leading-relaxed max-w-xl mx-auto">

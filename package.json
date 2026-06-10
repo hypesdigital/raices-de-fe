@@ -1,5 +1,11 @@
 {
   "name": "raices-de-fe-landing",
   "version": "1.0.0",
-  "description": "Página de vendas Raíces de Fe"
+  "description": "Página de vendas Raíces de Fe",
+  "scripts": {
+    "build": "npx tailwindcss -i ./src/input.css -o ./tailwind.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
 }
